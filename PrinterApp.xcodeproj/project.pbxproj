@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		205038082BA38FCE008B69B4 /* ScannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205038072BA38FCE008B69B4 /* ScannerViewModel.swift */; };
 		20B1E4952BA1BB0500DBA0C4 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B1E4942BA1BB0500DBA0C4 /* SettingsView.swift */; };
 		20B1E4972BA1C39900DBA0C4 /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B1E4962BA1C39900DBA0C4 /* ScannerView.swift */; };
 		20E9F8A72BA0B4C9001A8785 /* PrinterAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E9F8A62BA0B4C9001A8785 /* PrinterAppApp.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		205038072BA38FCE008B69B4 /* ScannerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewModel.swift; sourceTree = "<group>"; };
 		20B1E4942BA1BB0500DBA0C4 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		20B1E4962BA1C39900DBA0C4 /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
 		20E9F8A32BA0B4C9001A8785 /* PrinterApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrinterApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -38,6 +40,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		205038062BA38FB4008B69B4 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				205038072BA38FCE008B69B4 /* ScannerViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		20B1E4982BA1C39D00DBA0C4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -67,6 +77,7 @@
 		20E9F8A52BA0B4C9001A8785 /* PrinterApp */ = {
 			isa = PBXGroup;
 			children = (
+				205038062BA38FB4008B69B4 /* ViewModels */,
 				20B1E4982BA1C39D00DBA0C4 /* Views */,
 				20E9F8A62BA0B4C9001A8785 /* PrinterAppApp.swift */,
 				20E9F8A82BA0B4C9001A8785 /* ContentView.swift */,
@@ -155,6 +166,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				20E9F8B52BA0B4EC001A8785 /* HomeView.swift in Sources */,
+				205038082BA38FCE008B69B4 /* ScannerViewModel.swift in Sources */,
 				20B1E4952BA1BB0500DBA0C4 /* SettingsView.swift in Sources */,
 				20E9F8A92BA0B4C9001A8785 /* ContentView.swift in Sources */,
 				20E9F8A72BA0B4C9001A8785 /* PrinterAppApp.swift in Sources */,
@@ -295,6 +307,7 @@
 				DEVELOPMENT_TEAM = 794A7PJ53M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "The app needs camera access to skan ";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -324,6 +337,7 @@
 				DEVELOPMENT_TEAM = 794A7PJ53M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "The app needs camera access to skan ";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
