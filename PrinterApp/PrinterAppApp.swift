@@ -11,7 +11,7 @@ import SwiftUI
 struct PrinterAppApp: App {
     
     @StateObject private var vm = ScannerViewModel()
-    
+
     var body: some Scene {
         WindowGroup {
             ContentView()

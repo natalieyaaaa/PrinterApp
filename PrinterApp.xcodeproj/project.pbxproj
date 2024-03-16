@@ -48,12 +48,20 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		2087977F2BA6495900436F16 /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				20B1E4942BA1BB0500DBA0C4 /* SettingsView.swift */,
+				20E9F8B42BA0B4EC001A8785 /* HomeView.swift */,
+				20B1E4962BA1C39900DBA0C4 /* ScannerView.swift */,
+			);
+			path = Tabs;
+			sourceTree = "<group>";
+		};
 		20B1E4982BA1C39D00DBA0C4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				20B1E4962BA1C39900DBA0C4 /* ScannerView.swift */,
-				20E9F8B42BA0B4EC001A8785 /* HomeView.swift */,
-				20B1E4942BA1BB0500DBA0C4 /* SettingsView.swift */,
+				2087977F2BA6495900436F16 /* Tabs */,
 			);
 			path = Views;
 			sourceTree = "<group>";
