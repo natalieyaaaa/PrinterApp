@@ -5,159 +5,144 @@
 //  Created by Наташа Яковчук on 14.03.2024.
 //
 
-import AVKit
-import Foundation
 import SwiftUI
 import VisionKit
+import PDFKit
 
-enum ScanType: String {
-    case text
-}
-
-enum DataScannerAccessStatusType {
-    case notDetermined
-    case cameraAccessNotGranted
-    case cameraNotAvailable
-    case scannerAvailable
-    case scannerNotAvailable
-}
-
-@MainActor
-final class ScannerViewModel: NSObject, ObservableObject {
+/// A view that scans documents.
+public struct DocumentScannerView: UIViewControllerRepresentable {
+    @Environment(\.presentationMode)
+    private var presentationMode
     
-    @Published var dataScannerAccessStatus: DataScannerAccessStatusType = .notDetermined
-    @Published var recognizedItems: [RecognizedItem] = []
-    @Published var scanType: ScanType = .text
-    @Published var textContentType: DataScannerViewController.TextContentType?
-    @Published var recognizesMultipleItems = true
-        
-    private let captureDevice = AVCaptureDevice.default(for: .video)
-
-    func toggleFlash() {
-            guard let device = captureDevice else { return }
-            do {
-                try device.lockForConfiguration()
-                if device.hasTorch {
-                    device.torchMode = device.torchMode == .on ? .off : .on
-                }
-                device.unlockForConfiguration()
-            } catch {
-                print("Error toggling flash: \(error.localizedDescription)")
-            }
-        }
+    public var onCompletion: (Result<[UIImage], Error>) -> Void
     
-    var headerText: String {
-        if recognizedItems.isEmpty {
-            return "Scanning \(scanType.rawValue)"
-        } else {
-            return "Recognized \(recognizedItems.count) item(s)"
+    /// Creates a scanner that scans documents.
+    /// - Parameter onCompletion: A callback that will be invoked when the scanning operation has succeeded or failed.
+    public init(onCompletion: @escaping (Result<[UIImage], Error>) -> Void) {
+        self.onCompletion = onCompletion
+    }
+    
+    /// Creates a scanner that scans documents.
+    /// - Parameter onCompletion: A callback that will be invoked when the scanning operation has succeeded or failed.
+    public init(onCompletion: @escaping (Result<PDFDocument, Error>) -> Void) {
+        self.onCompletion = { result in
+            onCompletion(result.map { PDFDocument($0) })
         }
     }
     
-      var dataScannerViewId: Int {
-        var hasher = Hasher()
-        hasher.combine(scanType)
-        hasher.combine(recognizesMultipleItems)
-        if let textContentType {
-            hasher.combine(textContentType)
-        }
-        return hasher.finalize()
-    }
-    
-    private var isScannerAvailable: Bool {
-        DataScannerViewController.isAvailable && DataScannerViewController.isSupported
-    }
-    
-    func requestDataScannerAccessStatus() async {
-        guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
-            dataScannerAccessStatus = .cameraNotAvailable
-            return
-        }
-        
-        switch AVCaptureDevice.authorizationStatus(for: .video) {
-            
-        case .authorized:
-            dataScannerAccessStatus = isScannerAvailable ? .scannerAvailable : .scannerNotAvailable
-            
-        case .restricted, .denied:
-            dataScannerAccessStatus = .cameraAccessNotGranted
-            
-        case .notDetermined:
-            let granted = await AVCaptureDevice.requestAccess(for: .video)
-            if granted {
-                dataScannerAccessStatus = isScannerAvailable ? .scannerAvailable : .scannerNotAvailable
-            } else {
-                dataScannerAccessStatus = .cameraAccessNotGranted
-            }
-        
-        default: break
-            
-        }
-    }
-    
-    
-}
-
-struct DataScannerView: UIViewControllerRepresentable {
-    
-    @Binding var recognizedItems: [RecognizedItem]
-    let recognizedDataType: DataScannerViewController.RecognizedDataType
-    let recognizesMultipleItems: Bool
-    
-    func makeUIViewController(context: Context) -> DataScannerViewController {
-        let vc = DataScannerViewController(
-            recognizedDataTypes: [.text()],
-            qualityLevel: .balanced,
-            recognizesMultipleItems: recognizesMultipleItems,
-            isGuidanceEnabled: true,
-            isHighlightingEnabled: true
-        )
+    public func makeUIViewController(context: Context) -> VNDocumentCameraViewController {
+        let vc = VNDocumentCameraViewController()
+        vc.delegate = context.coordinator
         return vc
     }
     
-    func updateUIViewController(_ uiViewController: DataScannerViewController, context: Context) {
-        uiViewController.delegate = context.coordinator
-        try? uiViewController.startScanning()
-    }
-    
-    func makeCoordinator() -> Coordinator {
-        Coordinator(recognizedItems: $recognizedItems)
-    }
-    
-    static func dismantleUIViewController(_ uiViewController: DataScannerViewController, coordinator: Coordinator) {
-        uiViewController.stopScanning()
-    }
-    
-    
-    class Coordinator: NSObject, DataScannerViewControllerDelegate {
+    public func updateUIViewController(_ uiViewController: VNDocumentCameraViewController, context: Context) {
         
-        @Binding var recognizedItems: [RecognizedItem]
+    }
+    
+    public func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+    
+    private func dismiss() {
+        presentationMode.wrappedValue.dismiss()
+    }
+    
+    /// A Boolean variable that indicates whether or not the current device supports document scanning.
+    ///
+    /// This class method returns `false` for unsupported hardware.
+    public static var isSupported: Bool {
+        VNDocumentCameraViewController.isSupported
+    }
+}
 
-        init(recognizedItems: Binding<[RecognizedItem]>) {
-            self._recognizedItems = recognizedItems
+extension PDFDocument {
+    public convenience init(_ images: [UIImage]) {
+        self.init()
+        for i in 0..<images.count {
+            let pdfPage = PDFPage(image: images[i])
+            self.insert(pdfPage!, at: i)
         }
-        
-        func dataScanner(_ dataScanner: DataScannerViewController, didTapOn item: RecognizedItem) {
-            print("didTapOn \(item)")
-        }
-        
-        func dataScanner(_ dataScanner: DataScannerViewController, didAdd addedItems: [RecognizedItem], allItems: [RecognizedItem]) {
-            UINotificationFeedbackGenerator().notificationOccurred(.success)
-            recognizedItems.append(contentsOf: addedItems)
-            print("didAddItems")
-        }
-        
-        func dataScanner(_ dataScanner: DataScannerViewController, didRemove removedItems: [RecognizedItem], allItems: [RecognizedItem]) {
-            self.recognizedItems = recognizedItems.filter { item in
-                !removedItems.contains(where: {$0.id == item.id })
-            }
-            print("didRemovedItems ")
-        }
-        
-        func dataScanner(_ dataScanner: DataScannerViewController, becameUnavailableWithError error: DataScannerViewController.ScanningUnavailable) {
-            print("became unavailable with error \(error.localizedDescription)")
-        }
-        
     }
+}
+
+
+extension DocumentScannerView {
+    public class Coordinator: NSObject, VNDocumentCameraViewControllerDelegate {
+        var parent: DocumentScannerView
+        
+        init(_ parent: DocumentScannerView) {
+            self.parent = parent
+        }
+        
+        public func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFinishWith scan: VNDocumentCameraScan) {
+            parent.onCompletion(.success((0..<scan.pageCount).map(scan.imageOfPage(at:))))
+            parent.dismiss()
+        }
+        
+        public func documentCameraViewControllerDidCancel(_ controller: VNDocumentCameraViewController) {
+            parent.dismiss()
+        }
+        
+        public func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFailWithError error: Error) {
+            print("Error:", error)
+            parent.onCompletion(.failure(error))
+            parent.dismiss()
+        }
+    }
+}
+
+struct FullScreenCoverCompat<CoverContent: View>: ViewModifier {
+    @Binding var isPresented: Bool
+    let content: () -> CoverContent
     
+    func body(content: Content) -> some View {
+        GeometryReader { geo in
+            ZStack {
+                // this color makes sure that its enclosing ZStack
+                // (and the GeometryReader) fill the entire screen,
+                // allowing to know its full height
+                Color.clear
+                content
+                ZStack {
+                    // the color is here for the cover to fill
+                    // the entire screen regardless of its content
+                    Color.white
+                    self.content()
+                }
+                .offset(y: isPresented ? 0 : geo.size.height)
+                // feel free to play around with the animation speeds!
+                .animation(.spring())
+            }
+        }
+    }
+}
+
+extension View {
+    @available(iOS, obsoleted: 14, renamed: "fullScreenCover")
+    func fullScreenCoverCompat<Content: View>(isPresented: Binding<Bool>,
+                                              content: @escaping () -> Content) -> some View {
+        self.modifier(FullScreenCoverCompat(isPresented: isPresented,
+                                            content: content))
+    }
+}
+
+
+extension View {
+    @ViewBuilder
+    public func documentScanner(
+        isPresented: Binding<Bool>,
+        onCompletion: @escaping (Result<[UIImage], Error>) -> Void
+    ) -> some View {
+        if #available(iOS 14, macCatalyst 14, visionOS 1, *) {
+            fullScreenCover(isPresented: isPresented) {
+                DocumentScannerView(onCompletion: onCompletion)
+                    .ignoresSafeArea()
+            }
+        } else {
+            fullScreenCover(isPresented: isPresented) {
+                DocumentScannerView(onCompletion: onCompletion)
+            }
+        }
+    }
 }

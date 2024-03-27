@@ -18,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		202D36A12BB2DEB200755462 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		205038072BA38FCE008B69B4 /* ScannerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewModel.swift; sourceTree = "<group>"; };
 		20B1E4942BA1BB0500DBA0C4 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		20B1E4962BA1C39900DBA0C4 /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
@@ -85,6 +86,7 @@
 		20E9F8A52BA0B4C9001A8785 /* PrinterApp */ = {
 			isa = PBXGroup;
 			children = (
+				202D36A12BB2DEB200755462 /* Info.plist */,
 				205038062BA38FB4008B69B4 /* ViewModels */,
 				20B1E4982BA1C39D00DBA0C4 /* Views */,
 				20E9F8A62BA0B4C9001A8785 /* PrinterAppApp.swift */,
@@ -315,7 +317,9 @@
 				DEVELOPMENT_TEAM = 794A7PJ53M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PrinterApp/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "The app needs camera access to skan ";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Give access to photo library";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -345,7 +349,9 @@
 				DEVELOPMENT_TEAM = 794A7PJ53M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PrinterApp/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "The app needs camera access to skan ";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Give access to photo library";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

@@ -10,15 +10,10 @@ import SwiftUI
 @main
 struct PrinterAppApp: App {
     
-    @StateObject private var vm = ScannerViewModel()
 
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(vm)
-                .task {
-                    await vm.requestDataScannerAccessStatus()
-                }
                 .preferredColorScheme(.light)
         }
     }
