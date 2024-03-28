@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State var selection = 2
+    @State var selection = 1
 
     @State var showScanner = false
 
@@ -34,12 +34,12 @@ struct ContentView: View {
                         showScanner = true
                     } label: {
                         VStack {
-                            Image(systemName: "scanner")
+                            Image("scanner")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .frame(height: 20)
+                                .frame(width: 32)
                             Text("Scanner")
-                                .font(.system(size: 15))
+                                .font(.system(size: 14))
                         }
                     }.foregroundColor(.gray)
                     
@@ -49,13 +49,17 @@ struct ContentView: View {
                         selection = 1
                     } label: {
                         VStack {
-                            Image(systemName: "printer")
+                            Image("printer")
+                                .renderingMode(.template)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .frame(height: 30)
-                            
+                                .frame(width: 32)
+                                .tint(.gray)
+
                             Text("Printer")
-                        }
+                                .font(.system(size: 14))
+
+                        }.foregroundStyle(selection == 1 ? .blue : .gray)
                     }
                     
                     Spacer()
@@ -64,19 +68,23 @@ struct ContentView: View {
                         selection = 2
                     } label: {
                         VStack {
-                            Image(systemName: "gearshape")
+                            Image("settings")
+                                .renderingMode(.template)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .frame(height: 30)
+                                .frame(width: 32)
+                            
                             Text("Settings")
-                        }
+                                .font(.system(size: 14))
+
+                        }.foregroundStyle(selection == 2 ? .blue : .gray)
                     }
                 }.padding()
-                    .padding(.bottom, 50)
+                    .padding(.bottom, 30)
                     .background(Color.white)
                     .cornerRadius(12)
                     .shadow(radius: 5)
-                    .offset(y: 50)
+                    .offset(y: 40)
             }.zIndex(2)
         }
         .documentScanner(isPresented: $showScanner) { result in
