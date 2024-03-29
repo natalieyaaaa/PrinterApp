@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		205038082BA38FCE008B69B4 /* ScannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205038072BA38FCE008B69B4 /* ScannerViewModel.swift */; };
-		20917E552BB71821001F4ADC /* PrintingKit in Frameworks */ = {isa = PBXBuildFile; productRef = 20917E542BB71821001F4ADC /* PrintingKit */; };
 		20917E582BB72613001F4ADC /* PrinterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20917E572BB72613001F4ADC /* PrinterViewModel.swift */; };
 		20B1E4952BA1BB0500DBA0C4 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B1E4942BA1BB0500DBA0C4 /* SettingsView.swift */; };
 		20E9F8A72BA0B4C9001A8785 /* PrinterAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E9F8A62BA0B4C9001A8785 /* PrinterAppApp.swift */; };
@@ -17,7 +16,7 @@
 		20E9F8AE2BA0B4CB001A8785 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20E9F8AD2BA0B4CB001A8785 /* Preview Assets.xcassets */; };
 		20E9F8B52BA0B4EC001A8785 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E9F8B42BA0B4EC001A8785 /* HomeView.swift */; };
 		20F5A7812BB55EEF00DB65C2 /* ProView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F5A7802BB55EEF00DB65C2 /* ProView.swift */; };
-		20F5A7832BB55F1200DB65C2 /* PhotoPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F5A7822BB55F1200DB65C2 /* PhotoPickerView.swift */; };
+		20FAAB532BB778D9008B4EFA /* ImagePicker + UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FAAB522BB778D9008B4EFA /* ImagePicker + UIKit.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,7 +32,7 @@
 		20E9F8AD2BA0B4CB001A8785 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		20E9F8B42BA0B4EC001A8785 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		20F5A7802BB55EEF00DB65C2 /* ProView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProView.swift; sourceTree = "<group>"; };
-		20F5A7822BB55F1200DB65C2 /* PhotoPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerView.swift; sourceTree = "<group>"; };
+		20FAAB522BB778D9008B4EFA /* ImagePicker + UIKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ImagePicker + UIKit.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,7 +40,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				20917E552BB71821001F4ADC /* PrintingKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,9 +67,9 @@
 		20B1E4982BA1C39D00DBA0C4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				20FAAB522BB778D9008B4EFA /* ImagePicker + UIKit.swift */,
 				2087977F2BA6495900436F16 /* Tabs */,
 				20F5A7802BB55EEF00DB65C2 /* ProView.swift */,
-				20F5A7822BB55F1200DB65C2 /* PhotoPickerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -132,7 +130,6 @@
 			);
 			name = PrinterApp;
 			packageProductDependencies = (
-				20917E542BB71821001F4ADC /* PrintingKit */,
 			);
 			productName = PrinterApp;
 			productReference = 20E9F8A32BA0B4C9001A8785 /* PrinterApp.app */;
@@ -163,7 +160,6 @@
 			);
 			mainGroup = 20E9F89A2BA0B4C9001A8785;
 			packageReferences = (
-				20917E532BB71821001F4ADC /* XCRemoteSwiftPackageReference "PrintingKit" */,
 			);
 			productRefGroup = 20E9F8A42BA0B4C9001A8785 /* Products */;
 			projectDirPath = "";
@@ -197,7 +193,7 @@
 				20F5A7812BB55EEF00DB65C2 /* ProView.swift in Sources */,
 				20B1E4952BA1BB0500DBA0C4 /* SettingsView.swift in Sources */,
 				20E9F8A92BA0B4C9001A8785 /* ContentView.swift in Sources */,
-				20F5A7832BB55F1200DB65C2 /* PhotoPickerView.swift in Sources */,
+				20FAAB532BB778D9008B4EFA /* ImagePicker + UIKit.swift in Sources */,
 				20E9F8A72BA0B4C9001A8785 /* PrinterAppApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -412,25 +408,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		20917E532BB71821001F4ADC /* XCRemoteSwiftPackageReference "PrintingKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/danielsaidi/PrintingKit?tab=readme-ov-file";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.5.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		20917E542BB71821001F4ADC /* PrintingKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 20917E532BB71821001F4ADC /* XCRemoteSwiftPackageReference "PrintingKit" */;
-			productName = PrintingKit;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 20E9F89B2BA0B4C9001A8785 /* Project object */;
 }

@@ -10,105 +10,108 @@ import _PhotosUI_SwiftUI
 import UIKit
 
 struct HomeView: View {
-        
-   @StateObject var pvm = PrinterViewModel()
+    
+    @EnvironmentObject var pvm: PrinterViewModel
     
     @State private var showProSubScreen = false
     @State private var showFileImporter = false
-    @State private var showPrinter = false
-
+    @State private var isShowingImagePicker = false
+    
+    
     var body: some View {
-            NavigationView {
-                VStack {
-                    HStack {
-                             
-                        Text("Printer")
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .font(.largeTitle)
-                            .bold()
-                            .padding(.leading)
-                        
-                        Spacer()
-                        
-                        Image("pro")
-                            .frame(maxWidth: .infinity, alignment: .trailing)
-                            .padding(.trailing)
-                    }
-                    HStack {
-                        
-                        Button {
-//                            showFileImporter = true
-                            
-                        } label: {
-                            MainOptions(text: "From Files", image: "files")}
-                        
-                        Spacer()
-                            .frame(width: 16)
-                        
-                        PhotosPicker(selection: $pvm.selectedItems, matching: .images, label: {
-                            MainOptions(text: "From Photos", image: "gallery")})
-                        .onChange(of: pvm.selectedItems) {
-                            if !pvm.selectedItems.isEmpty {
-                                showProSubScreen = true
-                                
-                            }
-
-                            }
-                      
-                    }.padding(.horizontal)
+        NavigationView {
+            VStack {
+                HStack {
                     
-                    HStack {
-                    
-                        Image("printer")
-                        Text("What to print")
-                            .font(.title3)
-                            .fontWeight(.semibold)
-                        
-                    }.frame(maxWidth: .infinity, alignment: .leading)
-                        .padding()
-                    
-                    VStack(spacing: 16) {
-                        
-                        NavigationLink{} label: {
-                            PrintOption(textMain: "Take Photo", textSub: "Take & Print", image: "camera")}
-                        
-                        NavigationLink{} label: {
-                            PrintOption(textMain: "Print Text", textSub: "Type & Print text", image: "text")}
-                        
-                        NavigationLink{} label: {
-                            PrintOption(textMain: "Email", textSub: "Print your emails", image: "email")}
-                        
-                        NavigationLink{} label: {
-                            PrintOption(textMain: "Web", textSub: "Print web page", image: "web")
-                        }
-                        
-                    }.padding(.horizontal)
-                    
+                    Text("Printer")
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .font(.largeTitle)
+                        .bold()
+                        .padding(.leading)
                     
                     Spacer()
                     
+                    Image("pro")
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                        .padding(.trailing)
                 }
-            }.fullScreenCover(isPresented: $showProSubScreen, content: {})
+                HStack {
+                    
+                    Button {
+                        //                            showFileImporter = true
+                        
+                    } label: {
+                        MainOptions(text: "From Files", image: "files")}
+                    
+                    Spacer()
+                        .frame(width: 16)
+                    
+                    Button {
+                        isShowingImagePicker = true
+                    } label: {
+                        MainOptions(text: "From Photos", image: "gallery")
+                    }.onChange(of: isShowingImagePicker) {
+                        pvm.printImages()
+                    }
+                    
+                }.padding(.horizontal)
+                
+                HStack {
+                    
+                    Image("printer")
+                    Text("What to print")
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                    
+                }.frame(maxWidth: .infinity, alignment: .leading)
+                    .padding()
+                
+                VStack(spacing: 16) {
+                    
+                    NavigationLink{} label: {
+                        PrintOption(textMain: "Take Photo", textSub: "Take & Print", image: "camera")}
+                    
+                    NavigationLink{} label: {
+                        PrintOption(textMain: "Print Text", textSub: "Type & Print text", image: "text")}
+                    
+                    NavigationLink{} label: {
+                        PrintOption(textMain: "Email", textSub: "Print your emails", image: "email")}
+                    
+                    NavigationLink{} label: {
+                        PrintOption(textMain: "Web", textSub: "Print web page", image: "web")
+                    }
+                    
+                }.padding(.horizontal)
+                
+                
+                Spacer()
+                
+            }
+        }.fullScreenCover(isPresented: $showProSubScreen, content: {})
             .fileImporter(isPresented: $showFileImporter, allowedContentTypes: [.item],  allowsMultipleSelection: true, onCompletion: { results in
                 switch results {
-            case .success(let fileurls):
-                print(fileurls.count)
-                
-                for fileurl in fileurls {
-                    print(fileurl.path)
+                case .success(let fileurls):
+                    print(fileurls.count)
+                    
+                    for fileurl in fileurls {
+                        print(fileurl.path)
+                    }
+                    
+                case .failure(let error):
+                    print(error)
                 }
-                
-            case .failure(let error):
-                print(error)
-            }
             })
-        }
- 
+            .sheet(isPresented: $isShowingImagePicker) {
+                ImagePicker(images: $pvm.selectedImages)
+            }
     }
+    
+}
 
 
 #Preview {
     HomeView()
+        .environmentObject(PrinterViewModel())
 }
 
 
@@ -168,6 +171,6 @@ struct MainOptions: View {
                     .padding(.top, 10)
             }
         }.shadow(color: .gray.opacity(0.2), radius: 10, y: 10)
-
+        
     }
 }

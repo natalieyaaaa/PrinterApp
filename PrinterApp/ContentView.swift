@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @StateObject var pvm = PrinterViewModel()
+    
     @State var selection = 1
 
     @State var showScanner = false
@@ -20,6 +22,7 @@ struct ContentView: View {
             Group {
                 if selection == 1 {
                     HomeView()
+                        .environmentObject(pvm)
                 } else if selection == 2 {
                     SettingsView()
                 }
