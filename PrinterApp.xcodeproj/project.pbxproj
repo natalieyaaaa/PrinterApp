@@ -8,26 +8,32 @@
 
 /* Begin PBXBuildFile section */
 		205038082BA38FCE008B69B4 /* ScannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205038072BA38FCE008B69B4 /* ScannerViewModel.swift */; };
+		20917E552BB71821001F4ADC /* PrintingKit in Frameworks */ = {isa = PBXBuildFile; productRef = 20917E542BB71821001F4ADC /* PrintingKit */; };
+		20917E582BB72613001F4ADC /* PrinterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20917E572BB72613001F4ADC /* PrinterViewModel.swift */; };
 		20B1E4952BA1BB0500DBA0C4 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B1E4942BA1BB0500DBA0C4 /* SettingsView.swift */; };
-		20B1E4972BA1C39900DBA0C4 /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B1E4962BA1C39900DBA0C4 /* ScannerView.swift */; };
 		20E9F8A72BA0B4C9001A8785 /* PrinterAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E9F8A62BA0B4C9001A8785 /* PrinterAppApp.swift */; };
 		20E9F8A92BA0B4C9001A8785 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E9F8A82BA0B4C9001A8785 /* ContentView.swift */; };
 		20E9F8AB2BA0B4CB001A8785 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20E9F8AA2BA0B4CB001A8785 /* Assets.xcassets */; };
 		20E9F8AE2BA0B4CB001A8785 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20E9F8AD2BA0B4CB001A8785 /* Preview Assets.xcassets */; };
 		20E9F8B52BA0B4EC001A8785 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E9F8B42BA0B4EC001A8785 /* HomeView.swift */; };
+		20F5A7812BB55EEF00DB65C2 /* ProView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F5A7802BB55EEF00DB65C2 /* ProView.swift */; };
+		20F5A7832BB55F1200DB65C2 /* PhotoPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F5A7822BB55F1200DB65C2 /* PhotoPickerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		202D36A12BB2DEB200755462 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		205038072BA38FCE008B69B4 /* ScannerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewModel.swift; sourceTree = "<group>"; };
+		20917E562BB718E5001F4ADC /* PrinterApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PrinterApp.entitlements; sourceTree = "<group>"; };
+		20917E572BB72613001F4ADC /* PrinterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrinterViewModel.swift; sourceTree = "<group>"; };
 		20B1E4942BA1BB0500DBA0C4 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		20B1E4962BA1C39900DBA0C4 /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
 		20E9F8A32BA0B4C9001A8785 /* PrinterApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrinterApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		20E9F8A62BA0B4C9001A8785 /* PrinterAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrinterAppApp.swift; sourceTree = "<group>"; };
 		20E9F8A82BA0B4C9001A8785 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		20E9F8AA2BA0B4CB001A8785 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		20E9F8AD2BA0B4CB001A8785 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		20E9F8B42BA0B4EC001A8785 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		20F5A7802BB55EEF00DB65C2 /* ProView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProView.swift; sourceTree = "<group>"; };
+		20F5A7822BB55F1200DB65C2 /* PhotoPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20917E552BB71821001F4ADC /* PrintingKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -45,6 +52,7 @@
 			isa = PBXGroup;
 			children = (
 				205038072BA38FCE008B69B4 /* ScannerViewModel.swift */,
+				20917E572BB72613001F4ADC /* PrinterViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -54,7 +62,6 @@
 			children = (
 				20B1E4942BA1BB0500DBA0C4 /* SettingsView.swift */,
 				20E9F8B42BA0B4EC001A8785 /* HomeView.swift */,
-				20B1E4962BA1C39900DBA0C4 /* ScannerView.swift */,
 			);
 			path = Tabs;
 			sourceTree = "<group>";
@@ -63,6 +70,8 @@
 			isa = PBXGroup;
 			children = (
 				2087977F2BA6495900436F16 /* Tabs */,
+				20F5A7802BB55EEF00DB65C2 /* ProView.swift */,
+				20F5A7822BB55F1200DB65C2 /* PhotoPickerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -86,6 +95,7 @@
 		20E9F8A52BA0B4C9001A8785 /* PrinterApp */ = {
 			isa = PBXGroup;
 			children = (
+				20917E562BB718E5001F4ADC /* PrinterApp.entitlements */,
 				202D36A12BB2DEB200755462 /* Info.plist */,
 				205038062BA38FB4008B69B4 /* ViewModels */,
 				20B1E4982BA1C39D00DBA0C4 /* Views */,
@@ -121,6 +131,9 @@
 			dependencies = (
 			);
 			name = PrinterApp;
+			packageProductDependencies = (
+				20917E542BB71821001F4ADC /* PrintingKit */,
+			);
 			productName = PrinterApp;
 			productReference = 20E9F8A32BA0B4C9001A8785 /* PrinterApp.app */;
 			productType = "com.apple.product-type.application";
@@ -149,6 +162,9 @@
 				Base,
 			);
 			mainGroup = 20E9F89A2BA0B4C9001A8785;
+			packageReferences = (
+				20917E532BB71821001F4ADC /* XCRemoteSwiftPackageReference "PrintingKit" */,
+			);
 			productRefGroup = 20E9F8A42BA0B4C9001A8785 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -176,11 +192,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				20E9F8B52BA0B4EC001A8785 /* HomeView.swift in Sources */,
+				20917E582BB72613001F4ADC /* PrinterViewModel.swift in Sources */,
 				205038082BA38FCE008B69B4 /* ScannerViewModel.swift in Sources */,
+				20F5A7812BB55EEF00DB65C2 /* ProView.swift in Sources */,
 				20B1E4952BA1BB0500DBA0C4 /* SettingsView.swift in Sources */,
 				20E9F8A92BA0B4C9001A8785 /* ContentView.swift in Sources */,
+				20F5A7832BB55F1200DB65C2 /* PhotoPickerView.swift in Sources */,
 				20E9F8A72BA0B4C9001A8785 /* PrinterAppApp.swift in Sources */,
-				20B1E4972BA1C39900DBA0C4 /* ScannerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,6 +329,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = PrinterApp/PrinterApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PrinterApp/Preview Content\"";
@@ -343,6 +362,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = PrinterApp/PrinterApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PrinterApp/Preview Content\"";
@@ -392,6 +412,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		20917E532BB71821001F4ADC /* XCRemoteSwiftPackageReference "PrintingKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielsaidi/PrintingKit?tab=readme-ov-file";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.5.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		20917E542BB71821001F4ADC /* PrintingKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 20917E532BB71821001F4ADC /* XCRemoteSwiftPackageReference "PrintingKit" */;
+			productName = PrintingKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 20E9F89B2BA0B4C9001A8785 /* Project object */;
 }

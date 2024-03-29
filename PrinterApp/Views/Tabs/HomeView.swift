@@ -6,8 +6,17 @@
 //
 
 import SwiftUI
+import _PhotosUI_SwiftUI
+import UIKit
 
 struct HomeView: View {
+        
+   @StateObject var pvm = PrinterViewModel()
+    
+    @State private var showProSubScreen = false
+    @State private var showFileImporter = false
+    @State private var showPrinter = false
+
     var body: some View {
             NavigationView {
                 VStack {
@@ -27,18 +36,29 @@ struct HomeView: View {
                     }
                     HStack {
                         
-                        Button {} label: {
+                        Button {
+//                            showFileImporter = true
+                            
+                        } label: {
                             MainOptions(text: "From Files", image: "files")}
                         
                         Spacer()
                             .frame(width: 16)
-                        Button{} label: {
-                            MainOptions(text: "From Photos", image: "gallery")}
+                        
+                        PhotosPicker(selection: $pvm.selectedItems, matching: .images, label: {
+                            MainOptions(text: "From Photos", image: "gallery")})
+                        .onChange(of: pvm.selectedItems) {
+                            if !pvm.selectedItems.isEmpty {
+                                showProSubScreen = true
+                                
+                            }
 
+                            }
+                      
                     }.padding(.horizontal)
                     
                     HStack {
-                        
+                    
                         Image("printer")
                         Text("What to print")
                             .font(.title3)
@@ -68,8 +88,22 @@ struct HomeView: View {
                     Spacer()
                     
                 }
+            }.fullScreenCover(isPresented: $showProSubScreen, content: {})
+            .fileImporter(isPresented: $showFileImporter, allowedContentTypes: [.item],  allowsMultipleSelection: true, onCompletion: { results in
+                switch results {
+            case .success(let fileurls):
+                print(fileurls.count)
+                
+                for fileurl in fileurls {
+                    print(fileurl.path)
+                }
+                
+            case .failure(let error):
+                print(error)
             }
+            })
         }
+ 
     }
 
 

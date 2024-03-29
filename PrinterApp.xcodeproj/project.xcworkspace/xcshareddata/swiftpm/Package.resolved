@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "printingkit?tab=readme-ov-file",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/danielsaidi/PrintingKit?tab=readme-ov-file",
+      "state" : {
+        "revision" : "6c8d05529deca6da93aa241dd0905d2705626955",
+        "version" : "0.5.0"
+      }
+    }
+  ],
+  "version" : 2
+}
