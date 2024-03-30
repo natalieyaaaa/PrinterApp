@@ -21,7 +21,7 @@ struct ContentView: View {
         ZStack {
             Group {
                 if selection == 1 {
-                    HomeView()
+                    HomeView(handlePickedPDF: {_ in })
                         .environmentObject(pvm)
                 } else if selection == 2 {
                     SettingsView()

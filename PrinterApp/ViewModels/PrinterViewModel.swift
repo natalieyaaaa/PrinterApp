@@ -14,6 +14,7 @@ import _PhotosUI_SwiftUI
 final class PrinterViewModel: ObservableObject {
     
     @Published var selectedImages = [UIImage]()
+    @Published var selectedFileUrl: URL?
     
     func printImages() {
         // Создание UIPrintInteractionController для печати
@@ -21,7 +22,6 @@ final class PrinterViewModel: ObservableObject {
         
         // Установка изображения для печати
         printController.printingItems = selectedImages
-        
         // Открытие контроллера печати для выбора принтера и настройки печати
         printController.present(animated: true) { (controller, completed, error) in
             if let error = error {
@@ -36,4 +36,46 @@ final class PrinterViewModel: ObservableObject {
         }
     }
     
+    func printFile() {
+        guard let selectedFileUrl = selectedFileUrl else {
+            print("No file selected")
+            return
+        }
+        
+        // Запрашиваем доступ к файлу
+        guard selectedFileUrl.startAccessingSecurityScopedResource() else {
+            print("Failed to access file")
+            return
+        }
+        
+        defer {
+            // Освобождаем доступ к файлу после окончания использования
+            selectedFileUrl.stopAccessingSecurityScopedResource()
+        }
+        
+        do {
+            // Читаем содержимое файла
+            let fileData = try Data(contentsOf: selectedFileUrl)
+            
+            // Создаем контроллер интеракции печати для печати
+            let printController = UIPrintInteractionController.shared
+            
+            // Устанавливаем документ для печати
+            printController.printingItem = fileData as Any
+            
+            // Показываем контроллер печати для выбора принтера и настроек печати
+            printController.present(animated: true) { (controller, completed, error) in
+                if let error = error {
+                    print("Error presenting print controller: \(error.localizedDescription)")
+                } else if completed {
+                    print("Printing completed successfully")
+                } else {
+                    print("Printing canceled")
+                }
+            }
+        } catch {
+            print("Error reading file data: \(error.localizedDescription)")
+        }
+    }
+
 }

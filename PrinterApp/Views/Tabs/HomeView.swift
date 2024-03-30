@@ -17,7 +17,8 @@ struct HomeView: View {
     @State private var showFileImporter = false
     @State private var isShowingImagePicker = false
     
-    
+    var handlePickedPDF: (URL) -> Void
+
     var body: some View {
         NavigationView {
             VStack {
@@ -38,10 +39,11 @@ struct HomeView: View {
                 HStack {
                     
                     Button {
-                        //                            showFileImporter = true
+                        showFileImporter = true
                         
                     } label: {
-                        MainOptions(text: "From Files", image: "files")}
+                        MainOptions(text: "From Files", image: "files")
+                    }.onChange(of: pvm.selectedFileUrl) {pvm.printFile()}
                     
                     Spacer()
                         .frame(width: 16)
@@ -88,19 +90,26 @@ struct HomeView: View {
                 
             }
         }.fullScreenCover(isPresented: $showProSubScreen, content: {})
-            .fileImporter(isPresented: $showFileImporter, allowedContentTypes: [.item],  allowsMultipleSelection: true, onCompletion: { results in
-                switch results {
-                case .success(let fileurls):
-                    print(fileurls.count)
-                    
-                    for fileurl in fileurls {
-                        print(fileurl.path)
-                    }
-                    
-                case .failure(let error):
-                    print(error)
+        
+            .fileImporter(isPresented: $showFileImporter, allowedContentTypes: [.pdf], allowsMultipleSelection: false) { result in
+                switch result {
+                              case .success(let files):
+                                  files.forEach { file in
+                                      // gain access to the directory
+                                      let gotAccess = file.startAccessingSecurityScopedResource()
+                                      if !gotAccess { return }
+                                      // access the directory URL
+                                      // (read templates in the directory, make a bookmark, etc.)
+                                      pvm.selectedFileUrl = file
+                                      // release access
+                                      file.stopAccessingSecurityScopedResource()
+                                  }
+                              case .failure(let error):
+                                  // handle error
+                                  print(error)
                 }
-            })
+            }
+        
             .sheet(isPresented: $isShowingImagePicker) {
                 ImagePicker(images: $pvm.selectedImages)
             }
@@ -110,7 +119,7 @@ struct HomeView: View {
 
 
 #Preview {
-    HomeView()
+    HomeView(handlePickedPDF: {_ in })
         .environmentObject(PrinterViewModel())
 }
 
