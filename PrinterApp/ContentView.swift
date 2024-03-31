@@ -82,7 +82,8 @@ struct ContentView: View {
 
                         }.foregroundStyle(selection == 2 ? .blue : .gray)
                     }
-                }.padding()
+                }.padding(.horizontal, 20)
+                .padding(.top, 5)
                     .padding(.bottom, 30)
                     .background(Color.white)
                     .cornerRadius(12)
@@ -95,7 +96,7 @@ struct ContentView: View {
             case .success(let success):
                 pickedImages = success
             case .failure(let error):
-                print("")
+                print(error)
             }
         }
     }

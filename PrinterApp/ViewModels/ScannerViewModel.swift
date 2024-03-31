@@ -9,18 +9,21 @@ import SwiftUI
 import VisionKit
 import PDFKit
 
-/// A view that scans documents.
 public struct DocumentScannerView: UIViewControllerRepresentable {
     @Environment(\.presentationMode)
     private var presentationMode
     
+    public var scannedImages: [UIImage] = [] // New property to store scanned images
     public var onCompletion: (Result<[UIImage], Error>) -> Void
+    public var saveURL: URL? // Add a parameter for specifying the save location
+
     
     /// Creates a scanner that scans documents.
     /// - Parameter onCompletion: A callback that will be invoked when the scanning operation has succeeded or failed.
-    public init(onCompletion: @escaping (Result<[UIImage], Error>) -> Void) {
-        self.onCompletion = onCompletion
-    }
+    public init(onCompletion: @escaping (Result<[UIImage], Error>) -> Void, saveURL: URL? = nil) {
+         self.onCompletion = onCompletion
+         self.saveURL = saveURL // Initialize the saveURL parameter
+     }
     
     /// Creates a scanner that scans documents.
     /// - Parameter onCompletion: A callback that will be invoked when the scanning operation has succeeded or failed.
@@ -76,7 +79,9 @@ extension DocumentScannerView {
         }
         
         public func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFinishWith scan: VNDocumentCameraScan) {
-            parent.onCompletion(.success((0..<scan.pageCount).map(scan.imageOfPage(at:))))
+            let scannedImages = (0..<scan.pageCount).map(scan.imageOfPage(at:))
+            parent.scannedImages.append(contentsOf: scannedImages) // Append scanned images to the array
+            parent.onCompletion(.success(parent.scannedImages)) // Pass the array in the completion handler
             parent.dismiss()
         }
         

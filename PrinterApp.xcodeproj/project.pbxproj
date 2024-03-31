@@ -17,6 +17,7 @@
 		20E9F8B52BA0B4EC001A8785 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E9F8B42BA0B4EC001A8785 /* HomeView.swift */; };
 		20F5A7812BB55EEF00DB65C2 /* ProView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F5A7802BB55EEF00DB65C2 /* ProView.swift */; };
 		20FAAB532BB778D9008B4EFA /* ImagePicker + UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FAAB522BB778D9008B4EFA /* ImagePicker + UIKit.swift */; };
+		20FAAB552BB9EBD9008B4EFA /* TakePhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FAAB542BB9EBD9008B4EFA /* TakePhotoViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		20E9F8B42BA0B4EC001A8785 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		20F5A7802BB55EEF00DB65C2 /* ProView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProView.swift; sourceTree = "<group>"; };
 		20FAAB522BB778D9008B4EFA /* ImagePicker + UIKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ImagePicker + UIKit.swift"; sourceTree = "<group>"; };
+		20FAAB542BB9EBD9008B4EFA /* TakePhotoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakePhotoViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +53,7 @@
 			children = (
 				205038072BA38FCE008B69B4 /* ScannerViewModel.swift */,
 				20917E572BB72613001F4ADC /* PrinterViewModel.swift */,
+				20FAAB542BB9EBD9008B4EFA /* TakePhotoViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -68,8 +71,8 @@
 			isa = PBXGroup;
 			children = (
 				20FAAB522BB778D9008B4EFA /* ImagePicker + UIKit.swift */,
-				2087977F2BA6495900436F16 /* Tabs */,
 				20F5A7802BB55EEF00DB65C2 /* ProView.swift */,
+				2087977F2BA6495900436F16 /* Tabs */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -194,6 +197,7 @@
 				20B1E4952BA1BB0500DBA0C4 /* SettingsView.swift in Sources */,
 				20E9F8A92BA0B4C9001A8785 /* ContentView.swift in Sources */,
 				20FAAB532BB778D9008B4EFA /* ImagePicker + UIKit.swift in Sources */,
+				20FAAB552BB9EBD9008B4EFA /* TakePhotoViewModel.swift in Sources */,
 				20E9F8A72BA0B4C9001A8785 /* PrinterAppApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -341,8 +345,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -377,8 +380,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

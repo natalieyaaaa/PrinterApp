@@ -16,6 +16,9 @@ struct HomeView: View {
     @State private var showProSubScreen = false
     @State private var showFileImporter = false
     @State private var isShowingImagePicker = false
+    @State private var isShowingCamera = false
+    
+    @State private var capturedImages: [UIImage] = []
     
     var handlePickedPDF: (URL) -> Void
 
@@ -53,7 +56,8 @@ struct HomeView: View {
                     } label: {
                         MainOptions(text: "From Photos", image: "gallery")
                     }.onChange(of: isShowingImagePicker) {
-                        pvm.printImages()
+                            pvm.printImages()
+                        
                     }
                     
                 }.padding(.horizontal)
@@ -70,8 +74,11 @@ struct HomeView: View {
                 
                 VStack(spacing: 16) {
                     
-                    NavigationLink{} label: {
+                    Button{isShowingCamera = true} label: {
                         PrintOption(textMain: "Take Photo", textSub: "Take & Print", image: "camera")}
+                    .onChange(of: isShowingCamera) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {pvm.printPhotos()}
+                    }
                     
                     NavigationLink{} label: {
                         PrintOption(textMain: "Print Text", textSub: "Type & Print text", image: "text")}
@@ -112,6 +119,14 @@ struct HomeView: View {
         
             .sheet(isPresented: $isShowingImagePicker) {
                 ImagePicker(images: $pvm.selectedImages)
+            }
+            .simpleCameraView(isPresented: $isShowingCamera, capturedImages: $capturedImages) { result in
+                           switch result {
+                           case .success(let images):
+                               pvm.takenPhotos = images
+                           case .failure(let error):
+                               print("Error capturing image: \(error)")
+                           }
             }
     }
     
