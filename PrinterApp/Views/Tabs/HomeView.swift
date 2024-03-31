@@ -21,7 +21,7 @@ struct HomeView: View {
     @State private var capturedImages: [UIImage] = []
     
     var handlePickedPDF: (URL) -> Void
-
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -56,7 +56,7 @@ struct HomeView: View {
                     } label: {
                         MainOptions(text: "From Photos", image: "gallery")
                     }.onChange(of: isShowingImagePicker) {
-                            pvm.printImages()
+                        pvm.printImages()
                         
                     }
                     
@@ -74,10 +74,10 @@ struct HomeView: View {
                 
                 VStack(spacing: 16) {
                     
-                    Button{isShowingCamera = true} label: {
-                        PrintOption(textMain: "Take Photo", textSub: "Take & Print", image: "camera")}
-                    .onChange(of: isShowingCamera) {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {pvm.printPhotos()}
+                    Button {
+                        isShowingCamera = true
+                    } label: {
+                        PrintOption(textMain: "Take Photo", textSub: "Take & Print", image: "camera")
                     }
                     
                     NavigationLink{} label: {
@@ -96,38 +96,37 @@ struct HomeView: View {
                 Spacer()
                 
             }
-        }.fullScreenCover(isPresented: $showProSubScreen, content: {})
-        
-            .fileImporter(isPresented: $showFileImporter, allowedContentTypes: [.pdf], allowsMultipleSelection: false) { result in
+        }/*.fullScreenCover(isPresented: $showProSubScreen, content: {})*/
+        .fileImporter(isPresented: $showFileImporter, allowedContentTypes: [.pdf], allowsMultipleSelection: false) { result in
                 switch result {
-                              case .success(let files):
-                                  files.forEach { file in
-                                      // gain access to the directory
-                                      let gotAccess = file.startAccessingSecurityScopedResource()
-                                      if !gotAccess { return }
-                                      // access the directory URL
-                                      // (read templates in the directory, make a bookmark, etc.)
-                                      pvm.selectedFileUrl = file
-                                      // release access
-                                      file.stopAccessingSecurityScopedResource()
-                                  }
-                              case .failure(let error):
-                                  // handle error
-                                  print(error)
+                case .success(let files):
+                    files.forEach { file in
+                        // gain access to the directory
+                        let gotAccess = file.startAccessingSecurityScopedResource()
+                        if !gotAccess { return }
+                        // access the directory URL
+                        // (read templates in the directory, make a bookmark, etc.)
+                        pvm.selectedFileUrl = file
+                        // release access
+                        file.stopAccessingSecurityScopedResource()
+                    }
+                case .failure(let error):
+                    // handle error
+                    print(error)
                 }
             }
-        
-            .sheet(isPresented: $isShowingImagePicker) {
+        .sheet(isPresented: $isShowingImagePicker) {
                 ImagePicker(images: $pvm.selectedImages)
             }
-            .simpleCameraView(isPresented: $isShowingCamera, capturedImages: $capturedImages) { result in
-                           switch result {
-                           case .success(let images):
-                               pvm.takenPhotos = images
-                           case .failure(let error):
-                               print("Error capturing image: \(error)")
-                           }
-            }
+            
+        .fullScreenCover(isPresented: $isShowingCamera) {
+            CameraView(isPresented: $isShowingCamera) { result in
+                if !result.isEmpty {
+                    pvm.takenPhotos = result
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) { pvm.printPhotos()}
+                }
+            }.ignoresSafeArea(.all)
+        }
     }
     
 }
