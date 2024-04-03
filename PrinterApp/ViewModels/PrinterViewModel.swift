@@ -9,20 +9,22 @@ import Foundation
 import SwiftUI
 import UIKit
 import _PhotosUI_SwiftUI
+import PDFKit
 
 
 final class PrinterViewModel: ObservableObject {
     
-    @Published var selectedImages = [UIImage]()
-    @Published var selectedFileUrl: URL?
-    @Published var takenPhotos = [UIImage]()
+    @Published var imagesPrint = [UIImage]()
+    @Published var fileURLPrint: URL?
+    @Published var photosPrint = [UIImage]()
+    @Published var textPrint = ""
     
     func printImages() {
         // Создание UIPrintInteractionController для печати
         let printController = UIPrintInteractionController.shared
         
         // Установка изображения для печати
-        printController.printingItems = selectedImages
+        printController.printingItems = imagesPrint
         // Открытие контроллера печати для выбора принтера и настройки печати
         printController.present(animated: true) { (controller, completed, error) in
             if let error = error {
@@ -33,12 +35,12 @@ final class PrinterViewModel: ObservableObject {
                 print("Печать отменена")
             }
             
-            self.selectedImages.removeAll()
+            self.imagesPrint.removeAll()
         }
     }
     
     func printFile() {
-        guard let selectedFileUrl = selectedFileUrl else {
+        guard let selectedFileUrl = fileURLPrint else {
             print("No file selected")
             return
         }
@@ -84,7 +86,7 @@ final class PrinterViewModel: ObservableObject {
         let printController = UIPrintInteractionController.shared
         
         // Установка изображения для печати
-        printController.printingItems = takenPhotos
+        printController.printingItems = photosPrint
         // Открытие контроллера печати для выбора принтера и настройки печати
         printController.present(animated: true) { (controller, completed, error) in
             if let error = error {
@@ -95,9 +97,38 @@ final class PrinterViewModel: ObservableObject {
                 print("Печать отменена")
             }
             
-            self.takenPhotos.removeAll()
+            self.photosPrint.removeAll()
         }
     }
     
-    
+    func printText() {
+        // Перевірка наявності можливості друку на пристрої            // Створення екземпляру UIPrintInteractionController
+            let printController = UIPrintInteractionController.shared
+            
+            // Налаштування друку
+            let printInfo = UIPrintInfo(dictionary:nil)
+            printInfo.outputType = .general
+            printController.printInfo = printInfo
+            
+            // Додавання рядка для друку
+            let printFormatter = UIMarkupTextPrintFormatter(markupText: textPrint)
+            printController.printFormatter = printFormatter
+            
+            // Виклик контролера друку
+        printController.present(animated: true) { (controller, completed, error) in
+            if let error = error {
+                print("Ошибка при открытии контроллера печати: \(error.localizedDescription)")
+            } else if completed {
+                print("Печать завершена успешно")
+            } else {
+                print("Печать отменена")
+            }
+            
+            self.textPrint = ""
+        }
+
+    }
+
+    // Приклад використання:
+
 }

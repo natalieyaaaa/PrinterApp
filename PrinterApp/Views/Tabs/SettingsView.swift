@@ -14,7 +14,7 @@ struct SettingsView: View {
                 Text("Settings")
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .font(.largeTitle)
-                    .bold()
+                    .font(Font.headline.weight(.bold))
                     .padding(.leading)
                 
                 VStack(spacing: 16) {
@@ -65,8 +65,8 @@ struct SettingsOptions: View {
             Text(text)
                 .foregroundStyle(.black)
                 .font(.title3)
-                .fontWeight(.semibold)
-            
+                .font(Font.headline.weight(.semibold))
+
             Spacer()
             
             Image("arrow")

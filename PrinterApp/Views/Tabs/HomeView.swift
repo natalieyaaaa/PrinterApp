@@ -17,6 +17,7 @@ struct HomeView: View {
     @State private var showFileImporter = false
     @State private var isShowingImagePicker = false
     @State private var isShowingCamera = false
+    @State private var isShowingPrintText = false
     
     @State private var capturedImages: [UIImage] = []
     
@@ -27,10 +28,9 @@ struct HomeView: View {
             VStack {
                 HStack {
                     
-                    Text("Printer")
+                    Text("**Printer**")
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .font(.largeTitle)
-                        .bold()
                         .padding(.leading)
                     
                     Spacer()
@@ -46,7 +46,9 @@ struct HomeView: View {
                         
                     } label: {
                         MainOptions(text: "From Files", image: "files")
-                    }.onChange(of: pvm.selectedFileUrl) {pvm.printFile()}
+                    }.onChange(of: pvm.fileURLPrint) { new in
+                        pvm.printFile()
+                    }
                     
                     Spacer()
                         .frame(width: 16)
@@ -55,9 +57,8 @@ struct HomeView: View {
                         isShowingImagePicker = true
                     } label: {
                         MainOptions(text: "From Photos", image: "gallery")
-                    }.onChange(of: isShowingImagePicker) {
+                    }.onChange(of: isShowingImagePicker) { new in
                         pvm.printImages()
-                        
                     }
                     
                 }.padding(.horizontal)
@@ -80,11 +81,8 @@ struct HomeView: View {
                         PrintOption(textMain: "Take Photo", textSub: "Take & Print", image: "camera")
                     }
                     
-                    NavigationLink{} label: {
+                    Button {isShowingPrintText = true} label: {
                         PrintOption(textMain: "Print Text", textSub: "Type & Print text", image: "text")}
-                    
-                    NavigationLink{} label: {
-                        PrintOption(textMain: "Email", textSub: "Print your emails", image: "email")}
                     
                     NavigationLink{} label: {
                         PrintOption(textMain: "Web", textSub: "Print web page", image: "web")
@@ -96,7 +94,7 @@ struct HomeView: View {
                 Spacer()
                 
             }
-        }/*.fullScreenCover(isPresented: $showProSubScreen, content: {})*/
+        } .padding(.top, 10)/*.fullScreenCover(isPresented: $showProSubScreen, content: {})*/
         .fileImporter(isPresented: $showFileImporter, allowedContentTypes: [.pdf], allowsMultipleSelection: false) { result in
                 switch result {
                 case .success(let files):
@@ -106,7 +104,7 @@ struct HomeView: View {
                         if !gotAccess { return }
                         // access the directory URL
                         // (read templates in the directory, make a bookmark, etc.)
-                        pvm.selectedFileUrl = file
+                        pvm.fileURLPrint = file
                         // release access
                         file.stopAccessingSecurityScopedResource()
                     }
@@ -116,17 +114,22 @@ struct HomeView: View {
                 }
             }
         .sheet(isPresented: $isShowingImagePicker) {
-                ImagePicker(images: $pvm.selectedImages)
+                ImagePicker(images: $pvm.imagesPrint)
             }
             
         .fullScreenCover(isPresented: $isShowingCamera) {
             CameraView(isPresented: $isShowingCamera) { result in
                 if !result.isEmpty {
-                    pvm.takenPhotos = result
+                    pvm.photosPrint = result
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1) { pvm.printPhotos()}
                 }
             }.ignoresSafeArea(.all)
         }
+        .fullScreenCover(isPresented: $isShowingPrintText, content: {
+            PrintTextView()
+                .environmentObject(pvm)
+        })
+       
     }
     
 }
@@ -187,9 +190,9 @@ struct MainOptions: View {
             VStack {
                 Image(image)
                 
-                Text(text)
+                Text("**\(text)**")
                     .font(.title2)
-                    .bold()
+                    .font(Font.headline.weight(.bold))
                     .foregroundStyle(.white)
                     .padding(.top, 10)
             }
