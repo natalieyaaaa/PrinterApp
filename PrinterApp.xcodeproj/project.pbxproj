@@ -11,6 +11,9 @@
 		2030988E2BBDA62300CAF67D /* PrintWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2030988D2BBDA62300CAF67D /* PrintWebView.swift */; };
 		203098912BBF013A00CAF67D /* Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203098902BBF013A00CAF67D /* Custom.swift */; };
 		203098932BBF03A600CAF67D /* WebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203098922BBF03A600CAF67D /* WebViewModel.swift */; };
+		203098972BBF3FB000CAF67D /* Documents.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 203098952BBF3FB000CAF67D /* Documents.xcdatamodeld */; };
+		203098992BBF40C700CAF67D /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203098982BBF40C700CAF67D /* CoreDataManager.swift */; };
+		2030989B2BBF47A300CAF67D /* PrintDocumentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2030989A2BBF47A300CAF67D /* PrintDocumentsView.swift */; };
 		205038082BA38FCE008B69B4 /* ScannerUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205038072BA38FCE008B69B4 /* ScannerUIController.swift */; };
 		20917E582BB72613001F4ADC /* PrinterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20917E572BB72613001F4ADC /* PrinterViewModel.swift */; };
 		20B1E4952BA1BB0500DBA0C4 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B1E4942BA1BB0500DBA0C4 /* SettingsView.swift */; };
@@ -30,6 +33,9 @@
 		2030988D2BBDA62300CAF67D /* PrintWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintWebView.swift; sourceTree = "<group>"; };
 		203098902BBF013A00CAF67D /* Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Custom.swift; sourceTree = "<group>"; };
 		203098922BBF03A600CAF67D /* WebViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewModel.swift; sourceTree = "<group>"; };
+		203098962BBF3FB000CAF67D /* Documents.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Documents.xcdatamodel; sourceTree = "<group>"; };
+		203098982BBF40C700CAF67D /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		2030989A2BBF47A300CAF67D /* PrintDocumentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintDocumentsView.swift; sourceTree = "<group>"; };
 		205038072BA38FCE008B69B4 /* ScannerUIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerUIController.swift; sourceTree = "<group>"; };
 		20917E562BB718E5001F4ADC /* PrinterApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PrinterApp.entitlements; sourceTree = "<group>"; };
 		20917E572BB72613001F4ADC /* PrinterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrinterViewModel.swift; sourceTree = "<group>"; };
@@ -65,6 +71,15 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
+		203098942BBF3F9000CAF67D /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				203098952BBF3FB000CAF67D /* Documents.xcdatamodeld */,
+				203098982BBF40C700CAF67D /* CoreDataManager.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 		205038062BA38FB4008B69B4 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -88,6 +103,7 @@
 			children = (
 				203098902BBF013A00CAF67D /* Custom.swift */,
 				20FAAB522BB778D9008B4EFA /* ImagePicker.swift */,
+				2030989A2BBF47A300CAF67D /* PrintDocumentsView.swift */,
 				2030988B2BBC052E00CAF67D /* PrintTextView.swift */,
 				2030988D2BBDA62300CAF67D /* PrintWebView.swift */,
 				20F5A7802BB55EEF00DB65C2 /* ProView.swift */,
@@ -116,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				20E9F8A82BA0B4C9001A8785 /* ContentView.swift */,
+				203098942BBF3F9000CAF67D /* CoreData */,
 				2030988F2BBF006600CAF67D /* Controllers */,
 				20917E562BB718E5001F4ADC /* PrinterApp.entitlements */,
 				202D36A12BB2DEB200755462 /* Info.plist */,
@@ -213,12 +230,15 @@
 				20E9F8B52BA0B4EC001A8785 /* HomeView.swift in Sources */,
 				203098932BBF03A600CAF67D /* WebViewModel.swift in Sources */,
 				20917E582BB72613001F4ADC /* PrinterViewModel.swift in Sources */,
+				203098992BBF40C700CAF67D /* CoreDataManager.swift in Sources */,
 				203098912BBF013A00CAF67D /* Custom.swift in Sources */,
 				205038082BA38FCE008B69B4 /* ScannerUIController.swift in Sources */,
 				20F5A7812BB55EEF00DB65C2 /* ProView.swift in Sources */,
+				203098972BBF3FB000CAF67D /* Documents.xcdatamodeld in Sources */,
 				20B1E4952BA1BB0500DBA0C4 /* SettingsView.swift in Sources */,
 				20E9F8A92BA0B4C9001A8785 /* ContentView.swift in Sources */,
 				20FAAB532BB778D9008B4EFA /* ImagePicker.swift in Sources */,
+				2030989B2BBF47A300CAF67D /* PrintDocumentsView.swift in Sources */,
 				20FAAB552BB9EBD9008B4EFA /* CameraUIController.swift in Sources */,
 				20E9F8A72BA0B4C9001A8785 /* PrinterAppApp.swift in Sources */,
 				2030988C2BBC052E00CAF67D /* PrintTextView.swift in Sources */,
@@ -444,6 +464,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		203098952BBF3FB000CAF67D /* Documents.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				203098962BBF3FB000CAF67D /* Documents.xcdatamodel */,
+			);
+			currentVersion = 203098962BBF3FB000CAF67D /* Documents.xcdatamodel */;
+			path = Documents.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 20E9F89B2BA0B4C9001A8785 /* Project object */;
 }

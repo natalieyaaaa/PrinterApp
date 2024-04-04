@@ -19,6 +19,7 @@ struct HomeView: View {
     @State private var isShowingCamera = false
     @State private var isShowingPrintText = false
     @State private var isShowingWebPrint = false
+    @State private var isShowinпDocsPrint = false
             
     var body: some View {
         VStack {
@@ -73,6 +74,10 @@ struct HomeView: View {
                 
                 Button{isShowingWebPrint = true} label: {
                     PrintOption(textMain: "Web", textSub: "Print web page", image: "web")
+                }
+                
+                Button{isShowinпDocsPrint = true} label: {
+                    PrintOption(textMain: "Documents", textSub: "Print scanned docs", image: "email")
                 }
                 
             }.padding(.horizontal)

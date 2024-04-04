@@ -13,20 +13,14 @@ public struct DocumentScannerView: UIViewControllerRepresentable {
     @Environment(\.presentationMode)
     private var presentationMode
     
-    public var scannedImages: [UIImage] = [] // New property to store scanned images
+    public var scannedImages: [UIImage] = []
     public var onCompletion: (Result<[UIImage], Error>) -> Void
-    public var saveURL: URL? // Add a parameter for specifying the save location
 
-    
-    /// Creates a scanner that scans documents.
-    /// - Parameter onCompletion: A callback that will be invoked when the scanning operation has succeeded or failed.
-    public init(onCompletion: @escaping (Result<[UIImage], Error>) -> Void, saveURL: URL? = nil) {
+
+    public init(onCompletion: @escaping (Result<[UIImage], Error>) -> Void) {
          self.onCompletion = onCompletion
-         self.saveURL = saveURL // Initialize the saveURL parameter
      }
-    
-    /// Creates a scanner that scans documents.
-    /// - Parameter onCompletion: A callback that will be invoked when the scanning operation has succeeded or failed.
+
     public init(onCompletion: @escaping (Result<PDFDocument, Error>) -> Void) {
         self.onCompletion = { result in
             onCompletion(result.map { PDFDocument($0) })
@@ -50,10 +44,7 @@ public struct DocumentScannerView: UIViewControllerRepresentable {
     private func dismiss() {
         presentationMode.wrappedValue.dismiss()
     }
-    
-    /// A Boolean variable that indicates whether or not the current device supports document scanning.
-    ///
-    /// This class method returns `false` for unsupported hardware.
+
     public static var isSupported: Bool {
         VNDocumentCameraViewController.isSupported
     }
@@ -74,14 +65,23 @@ extension DocumentScannerView {
     public class Coordinator: NSObject, VNDocumentCameraViewControllerDelegate {
         var parent: DocumentScannerView
         
+        let coreData = CoreDataManager.shared
+        
         init(_ parent: DocumentScannerView) {
             self.parent = parent
         }
         
         public func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFinishWith scan: VNDocumentCameraScan) {
+            let currentDate = Date()
             let scannedImages = (0..<scan.pageCount).map(scan.imageOfPage(at:))
-            parent.scannedImages.append(contentsOf: scannedImages) // Append scanned images to the array
-            parent.onCompletion(.success(parent.scannedImages)) // Pass the array in the completion handler
+            parent.scannedImages.append(contentsOf: scannedImages) 
+            if !scannedImages.isEmpty {
+                for photo in scannedImages {
+                    let imageData = photo.pngData()!
+                    coreData.saveEntity(image: imageData, name: "PNG_\(currentDate.formatted(date: .abbreviated, time: .omitted))_Scanned", timeTaken: currentDate)
+                }
+            }
+            parent.onCompletion(.success(parent.scannedImages))
             parent.dismiss()
         }
         
@@ -105,20 +105,15 @@ struct FullScreenCoverCompat<CoverContent: View>: ViewModifier {
         withAnimation(.spring()) {
             GeometryReader { geo in
                 ZStack {
-                    // this color makes sure that its enclosing ZStack
-                    // (and the GeometryReader) fill the entire screen,
-                    // allowing to know its full height
                     Color.clear
                     content
                     ZStack {
-                        // the color is here for the cover to fill
-                        // the entire screen regardless of its content
+      
                         Color.white
                         self.content()
                     }
                     .offset(y: isPresented ? 0 : geo.size.height)
-                    // feel free to play around with the animation speeds!
-                    
+
                 }
             }
         }
@@ -153,3 +148,5 @@ extension View {
         }
     }
 }
+
+

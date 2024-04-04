@@ -24,7 +24,7 @@ struct PrintTextView: View {
                 Button {
                     dismiss()
                 } label: {
-                    Image(systemName: "xmark")
+                    Image(systemName: "arrow.left")
                         .tint(.black)
                         .font(.title3)
                 }.padding(.horizontal, 25)
