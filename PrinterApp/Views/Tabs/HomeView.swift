@@ -18,13 +18,13 @@ struct HomeView: View {
     @State private var isShowingImagePicker = false
     @State private var isShowingCamera = false
     @State private var isShowingPrintText = false
+    @State private var isShowingWebPrint = false
     
     @State private var capturedImages: [UIImage] = []
     
     var handlePickedPDF: (URL) -> Void
     
     var body: some View {
-        NavigationView {
             VStack {
                 HStack {
                     
@@ -84,7 +84,7 @@ struct HomeView: View {
                     Button {isShowingPrintText = true} label: {
                         PrintOption(textMain: "Print Text", textSub: "Type & Print text", image: "text")}
                     
-                    NavigationLink{} label: {
+                    Button{isShowingWebPrint = true} label: {
                         PrintOption(textMain: "Web", textSub: "Print web page", image: "web")
                     }
                     
@@ -93,8 +93,7 @@ struct HomeView: View {
                 
                 Spacer()
                 
-            }
-        } .padding(.top, 10)/*.fullScreenCover(isPresented: $showProSubScreen, content: {})*/
+            }.padding(.top, 10)/*.fullScreenCover(isPresented: $showProSubScreen, content: {})*/
         .fileImporter(isPresented: $showFileImporter, allowedContentTypes: [.pdf], allowsMultipleSelection: false) { result in
                 switch result {
                 case .success(let files):
@@ -129,7 +128,10 @@ struct HomeView: View {
             PrintTextView()
                 .environmentObject(pvm)
         })
-       
+        .fullScreenCover(isPresented: $isShowingWebPrint, content: {
+            PrintWebView()
+                .environmentObject(pvm)
+        })
     }
     
 }

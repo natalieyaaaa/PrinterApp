@@ -10,7 +10,7 @@ import SwiftUI
 import UIKit
 import _PhotosUI_SwiftUI
 import PDFKit
-
+import WebKit
 
 final class PrinterViewModel: ObservableObject {
     
@@ -18,7 +18,7 @@ final class PrinterViewModel: ObservableObject {
     @Published var fileURLPrint: URL?
     @Published var photosPrint = [UIImage]()
     @Published var textPrint = ""
-    
+
     func printImages() {
         // Создание UIPrintInteractionController для печати
         let printController = UIPrintInteractionController.shared
@@ -129,6 +129,7 @@ final class PrinterViewModel: ObservableObject {
 
     }
 
-    // Приклад використання:
+    
+
 
 }

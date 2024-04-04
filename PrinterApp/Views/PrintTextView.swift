@@ -32,17 +32,19 @@ struct PrintTextView: View {
                 HStack {
                     Image("text")
                         .padding(10)
-                    Text("Print text and Print")
-                        .font(Font.title3.weight(.semibold))
+                    Text("Type and Print")
+                        .font(Font.title2.weight(.semibold))
                         .foregroundStyle(.black.opacity(0.8))
                         .padding(.trailing)
                 }.background(RoundedRectangle(cornerRadius: 30)
-                    .foregroundStyle(.white)
-                    .shadow(color: .gray.opacity(0.2), radius: 13, y: 8))
+                    .foregroundStyle(.gray.opacity(0.2))
+                    .shadow(color: .gray.opacity(0.5), radius: 13, y: 8))
                 
                 Spacer()
 
             }
+            
+            Divider()
             
             TextEditor(text: $pvm.textPrint)
                 .focused($isFieldFocused)
@@ -86,7 +88,7 @@ struct PrintTextView: View {
             
             Spacer()
             
-        }.padding(.top, 20)
+        }
                 .alert("Type in something to print", isPresented: $showAlert) {
                     Button("Ok", role: .cancel, action: {})
                 }

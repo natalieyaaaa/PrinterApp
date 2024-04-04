@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2030988C2BBC052E00CAF67D /* PrintTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2030988B2BBC052E00CAF67D /* PrintTextView.swift */; };
+		2030988E2BBDA62300CAF67D /* PrintWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2030988D2BBDA62300CAF67D /* PrintWebView.swift */; };
 		205038082BA38FCE008B69B4 /* ScannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205038072BA38FCE008B69B4 /* ScannerViewModel.swift */; };
 		20917E582BB72613001F4ADC /* PrinterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20917E572BB72613001F4ADC /* PrinterViewModel.swift */; };
 		20B1E4952BA1BB0500DBA0C4 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B1E4942BA1BB0500DBA0C4 /* SettingsView.swift */; };
@@ -24,6 +25,7 @@
 /* Begin PBXFileReference section */
 		202D36A12BB2DEB200755462 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		2030988B2BBC052E00CAF67D /* PrintTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintTextView.swift; sourceTree = "<group>"; };
+		2030988D2BBDA62300CAF67D /* PrintWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintWebView.swift; sourceTree = "<group>"; };
 		205038072BA38FCE008B69B4 /* ScannerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewModel.swift; sourceTree = "<group>"; };
 		20917E562BB718E5001F4ADC /* PrinterApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PrinterApp.entitlements; sourceTree = "<group>"; };
 		20917E572BB72613001F4ADC /* PrinterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrinterViewModel.swift; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 			children = (
 				20FAAB522BB778D9008B4EFA /* ImagePicker + UIKit.swift */,
 				2030988B2BBC052E00CAF67D /* PrintTextView.swift */,
+				2030988D2BBDA62300CAF67D /* PrintWebView.swift */,
 				20F5A7802BB55EEF00DB65C2 /* ProView.swift */,
 				2087977F2BA6495900436F16 /* Tabs */,
 			);
@@ -203,6 +206,7 @@
 				20FAAB552BB9EBD9008B4EFA /* TakePhotoViewModel.swift in Sources */,
 				20E9F8A72BA0B4C9001A8785 /* PrinterAppApp.swift in Sources */,
 				2030988C2BBC052E00CAF67D /* PrintTextView.swift in Sources */,
+				2030988E2BBDA62300CAF67D /* PrintWebView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
