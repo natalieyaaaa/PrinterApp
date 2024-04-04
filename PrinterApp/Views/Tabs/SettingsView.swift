@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct SettingsView: View {
+    
+    let url = URL(string: "https://apps.apple.com/us/app/light-speedometer/id6447198696")!
+
     var body: some View {
         NavigationView {
             VStack {
@@ -28,7 +31,15 @@ struct SettingsView: View {
                     NavigationLink{} label: {
                         SettingsOptions(text: "Contact us", image: "mail")}
                     
-                    NavigationLink{} label: {
+                    Button {
+                        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                              let viewController = windowScene.windows.first?.rootViewController else {
+                            return
+                        }
+                        let av = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+                        viewController.present(av, animated: true, completion: nil)
+                        
+                    } label: {
                         SettingsOptions(text: "Share", image: "share")}
                     
                     NavigationLink{} label: {
