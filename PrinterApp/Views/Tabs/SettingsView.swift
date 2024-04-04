@@ -50,30 +50,3 @@ struct SettingsView: View {
     SettingsView()
 }
 
-
-struct SettingsOptions: View {
-    
-    var text = ""
-    var image = ""
-    
-    var body: some View {
-        
-        HStack {
-            Image(image)
-                .padding(.trailing, 10)
-            
-            Text(text)
-                .foregroundStyle(.black)
-                .font(.title3)
-                .font(Font.headline.weight(.semibold))
-
-            Spacer()
-            
-            Image("arrow")
-            
-        } .padding()
-            .background(RoundedRectangle(cornerRadius: 32).foregroundStyle(.white)
-                .shadow(color: .gray.opacity(0.2), radius: 13, y: 8))
-        
-    }
-}

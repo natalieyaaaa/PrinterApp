@@ -18,14 +18,12 @@ final class PrinterViewModel: ObservableObject {
     @Published var fileURLPrint: URL?
     @Published var photosPrint = [UIImage]()
     @Published var textPrint = ""
-
+    
+    let wvm = WebViewModel.shared
+    
     func printImages() {
-        // Создание UIPrintInteractionController для печати
         let printController = UIPrintInteractionController.shared
-        
-        // Установка изображения для печати
         printController.printingItems = imagesPrint
-        // Открытие контроллера печати для выбора принтера и настройки печати
         printController.present(animated: true) { (controller, completed, error) in
             if let error = error {
                 print("Ошибка при открытии контроллера печати: \(error.localizedDescription)")
@@ -45,28 +43,19 @@ final class PrinterViewModel: ObservableObject {
             return
         }
         
-        // Запрашиваем доступ к файлу
         guard selectedFileUrl.startAccessingSecurityScopedResource() else {
             print("Failed to access file")
             return
         }
         
         defer {
-            // Освобождаем доступ к файлу после окончания использования
             selectedFileUrl.stopAccessingSecurityScopedResource()
         }
         
         do {
-            // Читаем содержимое файла
             let fileData = try Data(contentsOf: selectedFileUrl)
-            
-            // Создаем контроллер интеракции печати для печати
             let printController = UIPrintInteractionController.shared
-            
-            // Устанавливаем документ для печати
             printController.printingItem = fileData as Any
-            
-            // Показываем контроллер печати для выбора принтера и настроек печати
             printController.present(animated: true) { (controller, completed, error) in
                 if let error = error {
                     print("Error presenting print controller: \(error.localizedDescription)")
@@ -80,14 +69,10 @@ final class PrinterViewModel: ObservableObject {
             print("Error reading file data: \(error.localizedDescription)")
         }
     }
-
+    
     func printPhotos() {
-        // Создание UIPrintInteractionController для печати
         let printController = UIPrintInteractionController.shared
-        
-        // Установка изображения для печати
         printController.printingItems = photosPrint
-        // Открытие контроллера печати для выбора принтера и настройки печати
         printController.present(animated: true) { (controller, completed, error) in
             if let error = error {
                 print("Ошибка при открытии контроллера печати: \(error.localizedDescription)")
@@ -102,19 +87,13 @@ final class PrinterViewModel: ObservableObject {
     }
     
     func printText() {
-        // Перевірка наявності можливості друку на пристрої            // Створення екземпляру UIPrintInteractionController
-            let printController = UIPrintInteractionController.shared
-            
-            // Налаштування друку
-            let printInfo = UIPrintInfo(dictionary:nil)
-            printInfo.outputType = .general
-            printController.printInfo = printInfo
-            
-            // Додавання рядка для друку
-            let printFormatter = UIMarkupTextPrintFormatter(markupText: textPrint)
-            printController.printFormatter = printFormatter
-            
-            // Виклик контролера друку
+        let printController = UIPrintInteractionController.shared
+        let printInfo = UIPrintInfo(dictionary:nil)
+        printInfo.outputType = .general
+        printController.printInfo = printInfo
+        let printFormatter = UIMarkupTextPrintFormatter(markupText: textPrint)
+        printController.printFormatter = printFormatter
+        
         printController.present(animated: true) { (controller, completed, error) in
             if let error = error {
                 print("Ошибка при открытии контроллера печати: \(error.localizedDescription)")
@@ -126,10 +105,32 @@ final class PrinterViewModel: ObservableObject {
             
             self.textPrint = ""
         }
-
+        
     }
-
     
-
-
+    func printWebPage() {
+        guard wvm.showedURL != "" else { return }
+        wvm.webView.loadURL(urlString: wvm.showedURL)
+        guard UIPrintInteractionController.isPrintingAvailable else {
+            print("Принтер недоступен")
+            return
+        }
+        
+        let printFormatter = wvm.webView.webView.viewPrintFormatter()
+        let printInfo = UIPrintInfo.printInfo()
+        printInfo.outputType = .general
+        printInfo.jobName = "Печать веб-страницы"
+        let printController = UIPrintInteractionController.shared
+        printController.printInfo = printInfo
+        printController.showsNumberOfCopies = false
+        printController.printFormatter = printFormatter
+        
+        printController.present(animated: true) { (controller, completed, error) in
+            if let error = error {
+                print("Ошибка при печати: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    
 }

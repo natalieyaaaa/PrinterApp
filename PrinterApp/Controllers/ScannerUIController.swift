@@ -102,22 +102,24 @@ struct FullScreenCoverCompat<CoverContent: View>: ViewModifier {
     let content: () -> CoverContent
     
     func body(content: Content) -> some View {
-        GeometryReader { geo in
-            ZStack {
-                // this color makes sure that its enclosing ZStack
-                // (and the GeometryReader) fill the entire screen,
-                // allowing to know its full height
-                Color.clear
-                content
+        withAnimation(.spring()) {
+            GeometryReader { geo in
                 ZStack {
-                    // the color is here for the cover to fill
-                    // the entire screen regardless of its content
-                    Color.white
-                    self.content()
+                    // this color makes sure that its enclosing ZStack
+                    // (and the GeometryReader) fill the entire screen,
+                    // allowing to know its full height
+                    Color.clear
+                    content
+                    ZStack {
+                        // the color is here for the cover to fill
+                        // the entire screen regardless of its content
+                        Color.white
+                        self.content()
+                    }
+                    .offset(y: isPresented ? 0 : geo.size.height)
+                    // feel free to play around with the animation speeds!
+                    
                 }
-                .offset(y: isPresented ? 0 : geo.size.height)
-                // feel free to play around with the animation speeds!
-                .animation(.spring())
             }
         }
     }

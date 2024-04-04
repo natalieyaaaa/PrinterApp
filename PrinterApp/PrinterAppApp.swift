@@ -9,13 +9,16 @@ import SwiftUI
 
 @main
 struct PrinterAppApp: App {
-    
+    @StateObject private var wvm = WebViewModel()
+    @StateObject private var pvm = PrinterViewModel()
 
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .preferredColorScheme(.light)
                 .onTapGesture {hideKeyboard()}
+                .environmentObject(pvm)
+                .environmentObject(wvm)
         }
     }
 }

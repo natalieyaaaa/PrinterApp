@@ -9,8 +9,9 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @StateObject var pvm = PrinterViewModel()
-    
+    @EnvironmentObject var pvm: PrinterViewModel
+    @EnvironmentObject var wvm: WebViewModel
+
     @State var selection = 1
 
     @State var showScanner = false
@@ -21,7 +22,7 @@ struct ContentView: View {
         ZStack {
             Group {
                 if selection == 1 {
-                    HomeView(handlePickedPDF: {_ in })
+                    HomeView()
                         .environmentObject(pvm)
                 } else if selection == 2 {
                     SettingsView()
@@ -32,7 +33,6 @@ struct ContentView: View {
                 Spacer()
                 
                 HStack {
-                    
                     Button {
                         showScanner = true
                     } label: {
@@ -58,10 +58,8 @@ struct ContentView: View {
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 32)
                                 .tint(.gray)
-
                             Text("Printer")
                                 .font(.system(size: 14))
-
                         }.foregroundStyle(selection == 1 ? .blue : .gray)
                     }
                     
@@ -76,12 +74,11 @@ struct ContentView: View {
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 32)
-                            
                             Text("Settings")
                                 .font(.system(size: 14))
-
                         }.foregroundStyle(selection == 2 ? .blue : .gray)
                     }
+                    
                 }.padding(.horizontal, 20)
                 .padding(.top, 5)
                     .padding(.bottom, 30)
@@ -89,6 +86,7 @@ struct ContentView: View {
                     .cornerRadius(12)
                     .shadow(radius: 5)
                     .offset(y: 40)
+                
             }.zIndex(2)
         }
         .documentScanner(isPresented: $showScanner) { result in
@@ -104,4 +102,6 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+        .environmentObject(PrinterViewModel())
+        .environmentObject(WebViewModel())
 }

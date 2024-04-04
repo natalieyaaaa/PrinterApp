@@ -9,7 +9,9 @@
 /* Begin PBXBuildFile section */
 		2030988C2BBC052E00CAF67D /* PrintTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2030988B2BBC052E00CAF67D /* PrintTextView.swift */; };
 		2030988E2BBDA62300CAF67D /* PrintWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2030988D2BBDA62300CAF67D /* PrintWebView.swift */; };
-		205038082BA38FCE008B69B4 /* ScannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205038072BA38FCE008B69B4 /* ScannerViewModel.swift */; };
+		203098912BBF013A00CAF67D /* Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203098902BBF013A00CAF67D /* Custom.swift */; };
+		203098932BBF03A600CAF67D /* WebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203098922BBF03A600CAF67D /* WebViewModel.swift */; };
+		205038082BA38FCE008B69B4 /* ScannerUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205038072BA38FCE008B69B4 /* ScannerUIController.swift */; };
 		20917E582BB72613001F4ADC /* PrinterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20917E572BB72613001F4ADC /* PrinterViewModel.swift */; };
 		20B1E4952BA1BB0500DBA0C4 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B1E4942BA1BB0500DBA0C4 /* SettingsView.swift */; };
 		20E9F8A72BA0B4C9001A8785 /* PrinterAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E9F8A62BA0B4C9001A8785 /* PrinterAppApp.swift */; };
@@ -18,15 +20,17 @@
 		20E9F8AE2BA0B4CB001A8785 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20E9F8AD2BA0B4CB001A8785 /* Preview Assets.xcassets */; };
 		20E9F8B52BA0B4EC001A8785 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E9F8B42BA0B4EC001A8785 /* HomeView.swift */; };
 		20F5A7812BB55EEF00DB65C2 /* ProView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F5A7802BB55EEF00DB65C2 /* ProView.swift */; };
-		20FAAB532BB778D9008B4EFA /* ImagePicker + UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FAAB522BB778D9008B4EFA /* ImagePicker + UIKit.swift */; };
-		20FAAB552BB9EBD9008B4EFA /* TakePhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FAAB542BB9EBD9008B4EFA /* TakePhotoViewModel.swift */; };
+		20FAAB532BB778D9008B4EFA /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FAAB522BB778D9008B4EFA /* ImagePicker.swift */; };
+		20FAAB552BB9EBD9008B4EFA /* CameraUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FAAB542BB9EBD9008B4EFA /* CameraUIController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		202D36A12BB2DEB200755462 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		2030988B2BBC052E00CAF67D /* PrintTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintTextView.swift; sourceTree = "<group>"; };
 		2030988D2BBDA62300CAF67D /* PrintWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintWebView.swift; sourceTree = "<group>"; };
-		205038072BA38FCE008B69B4 /* ScannerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewModel.swift; sourceTree = "<group>"; };
+		203098902BBF013A00CAF67D /* Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Custom.swift; sourceTree = "<group>"; };
+		203098922BBF03A600CAF67D /* WebViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewModel.swift; sourceTree = "<group>"; };
+		205038072BA38FCE008B69B4 /* ScannerUIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerUIController.swift; sourceTree = "<group>"; };
 		20917E562BB718E5001F4ADC /* PrinterApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PrinterApp.entitlements; sourceTree = "<group>"; };
 		20917E572BB72613001F4ADC /* PrinterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrinterViewModel.swift; sourceTree = "<group>"; };
 		20B1E4942BA1BB0500DBA0C4 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -37,8 +41,8 @@
 		20E9F8AD2BA0B4CB001A8785 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		20E9F8B42BA0B4EC001A8785 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		20F5A7802BB55EEF00DB65C2 /* ProView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProView.swift; sourceTree = "<group>"; };
-		20FAAB522BB778D9008B4EFA /* ImagePicker + UIKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ImagePicker + UIKit.swift"; sourceTree = "<group>"; };
-		20FAAB542BB9EBD9008B4EFA /* TakePhotoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakePhotoViewModel.swift; sourceTree = "<group>"; };
+		20FAAB522BB778D9008B4EFA /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		20FAAB542BB9EBD9008B4EFA /* CameraUIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraUIController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,12 +56,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2030988F2BBF006600CAF67D /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				205038072BA38FCE008B69B4 /* ScannerUIController.swift */,
+				20FAAB542BB9EBD9008B4EFA /* CameraUIController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		205038062BA38FB4008B69B4 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				205038072BA38FCE008B69B4 /* ScannerViewModel.swift */,
 				20917E572BB72613001F4ADC /* PrinterViewModel.swift */,
-				20FAAB542BB9EBD9008B4EFA /* TakePhotoViewModel.swift */,
+				203098922BBF03A600CAF67D /* WebViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -74,7 +86,8 @@
 		20B1E4982BA1C39D00DBA0C4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				20FAAB522BB778D9008B4EFA /* ImagePicker + UIKit.swift */,
+				203098902BBF013A00CAF67D /* Custom.swift */,
+				20FAAB522BB778D9008B4EFA /* ImagePicker.swift */,
 				2030988B2BBC052E00CAF67D /* PrintTextView.swift */,
 				2030988D2BBDA62300CAF67D /* PrintWebView.swift */,
 				20F5A7802BB55EEF00DB65C2 /* ProView.swift */,
@@ -102,12 +115,13 @@
 		20E9F8A52BA0B4C9001A8785 /* PrinterApp */ = {
 			isa = PBXGroup;
 			children = (
+				20E9F8A82BA0B4C9001A8785 /* ContentView.swift */,
+				2030988F2BBF006600CAF67D /* Controllers */,
 				20917E562BB718E5001F4ADC /* PrinterApp.entitlements */,
 				202D36A12BB2DEB200755462 /* Info.plist */,
 				205038062BA38FB4008B69B4 /* ViewModels */,
 				20B1E4982BA1C39D00DBA0C4 /* Views */,
 				20E9F8A62BA0B4C9001A8785 /* PrinterAppApp.swift */,
-				20E9F8A82BA0B4C9001A8785 /* ContentView.swift */,
 				20E9F8AA2BA0B4CB001A8785 /* Assets.xcassets */,
 				20E9F8AC2BA0B4CB001A8785 /* Preview Content */,
 			);
@@ -197,13 +211,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				20E9F8B52BA0B4EC001A8785 /* HomeView.swift in Sources */,
+				203098932BBF03A600CAF67D /* WebViewModel.swift in Sources */,
 				20917E582BB72613001F4ADC /* PrinterViewModel.swift in Sources */,
-				205038082BA38FCE008B69B4 /* ScannerViewModel.swift in Sources */,
+				203098912BBF013A00CAF67D /* Custom.swift in Sources */,
+				205038082BA38FCE008B69B4 /* ScannerUIController.swift in Sources */,
 				20F5A7812BB55EEF00DB65C2 /* ProView.swift in Sources */,
 				20B1E4952BA1BB0500DBA0C4 /* SettingsView.swift in Sources */,
 				20E9F8A92BA0B4C9001A8785 /* ContentView.swift in Sources */,
-				20FAAB532BB778D9008B4EFA /* ImagePicker + UIKit.swift in Sources */,
-				20FAAB552BB9EBD9008B4EFA /* TakePhotoViewModel.swift in Sources */,
+				20FAAB532BB778D9008B4EFA /* ImagePicker.swift in Sources */,
+				20FAAB552BB9EBD9008B4EFA /* CameraUIController.swift in Sources */,
 				20E9F8A72BA0B4C9001A8785 /* PrinterAppApp.swift in Sources */,
 				2030988C2BBC052E00CAF67D /* PrintTextView.swift in Sources */,
 				2030988E2BBDA62300CAF67D /* PrintWebView.swift in Sources */,
