@@ -12,7 +12,6 @@ import UIKit
 struct HomeView: View {
     
     @EnvironmentObject var pvm: PrinterViewModel
-    @EnvironmentObject var wvm: WebViewModel
     
     @State private var showFileImporter = false
     @State private var isShowingImagePicker = false
@@ -122,7 +121,6 @@ struct HomeView: View {
             .fullScreenCover(isPresented: $isShowingWebPrint, content: {
                 PrintWebView()
                     .environmentObject(pvm)
-                    .environmentObject(wvm)
             })
     }
     
@@ -132,7 +130,6 @@ struct HomeView: View {
 #Preview {
     HomeView()
         .environmentObject(PrinterViewModel())
-        .environmentObject(WebViewModel())
 }
 
 

@@ -10,7 +10,6 @@ import SwiftUI
 struct ContentView: View {
     
     @EnvironmentObject var pvm: PrinterViewModel
-    @EnvironmentObject var wvm: WebViewModel
 
     @State var selection = 1
 
@@ -103,5 +102,4 @@ struct ContentView: View {
 #Preview {
     ContentView()
         .environmentObject(PrinterViewModel())
-        .environmentObject(WebViewModel())
 }

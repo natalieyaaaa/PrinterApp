@@ -94,36 +94,3 @@ struct SettingsOptions: View {
     }
 }
 
-struct CustomURLTextField: View {
-    @Binding var input: String
-    var body: some View {
-        
-        HStack {
-            RoundedRectangle(cornerRadius: 15)
-                .foregroundStyle(.gray.opacity(0.2))
-                .frame(width: 280, height: 40)
-                .overlay {
-                    HStack(spacing: 0) {
-                        TextField("Type in URL...", text: $input)
-                            .padding()
-                            .frame(width: 260)
-                        
-                        if input != "" {
-                            Button {
-                                input = ""
-                            }label: {
-                                Image(systemName: "xmark")
-                                    .font(.system(size: 12))
-                                    .foregroundStyle(.gray)
-                                    .padding(4)
-                                    .background(Circle().foregroundStyle(.white))
-                                    .padding(.trailing)
-                            }
-                        } else {
-                            Spacer()
-                        }
-                    }.frame(maxWidth: 280)
-                }
-        }
-    }
-}

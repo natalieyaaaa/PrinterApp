@@ -19,7 +19,7 @@ final class PrinterViewModel: ObservableObject {
     @Published var photosPrint = [UIImage]()
     @Published var textPrint = ""
     
-    let wvm = WebViewModel.shared
+//    let wvm = WebViewModel.shared
     
     func printImages() {
         let printController = UIPrintInteractionController.shared
@@ -108,29 +108,29 @@ final class PrinterViewModel: ObservableObject {
         
     }
     
-    func printWebPage() {
-        guard wvm.showedURL != "" else { return }
-        wvm.webView.loadURL(urlString: wvm.showedURL)
-        guard UIPrintInteractionController.isPrintingAvailable else {
-            print("Принтер недоступен")
-            return
-        }
-        
-        let printFormatter = wvm.webView.webView.viewPrintFormatter()
-        let printInfo = UIPrintInfo.printInfo()
-        printInfo.outputType = .general
-        printInfo.jobName = "Печать веб-страницы"
-        let printController = UIPrintInteractionController.shared
-        printController.printInfo = printInfo
-        printController.showsNumberOfCopies = false
-        printController.printFormatter = printFormatter
-        
-        printController.present(animated: true) { (controller, completed, error) in
-            if let error = error {
-                print("Ошибка при печати: \(error.localizedDescription)")
-            }
-        }
-    }
+//    func printWebPage() {
+//        guard wvm.showedURL != "" else { return }
+//        wvm.webView.loadURL(urlString: wvm.showedURL)
+//        guard UIPrintInteractionController.isPrintingAvailable else {
+//            print("Принтер недоступен")
+//            return
+//        }
+//        
+//        let printFormatter = wvm.webView.webView.viewPrintFormatter()
+//        let printInfo = UIPrintInfo.printInfo()
+//        printInfo.outputType = .general
+//        printInfo.jobName = "Печать веб-страницы"
+//        let printController = UIPrintInteractionController.shared
+//        printController.printInfo = printInfo
+//        printController.showsNumberOfCopies = false
+//        printController.printFormatter = printFormatter
+//        
+//        printController.present(animated: true) { (controller, completed, error) in
+//            if let error = error {
+//                print("Ошибка при печати: \(error.localizedDescription)")
+//            }
+//        }
+//    }
     
     
 }
