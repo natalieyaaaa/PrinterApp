@@ -13,9 +13,14 @@ struct PrintDocumentsView: View {
     @EnvironmentObject var pvm: PrinterViewModel
     @Environment(\.dismiss) var dismiss
     
+    private var columns: [GridItem] = [
+          GridItem(.fixed(150), spacing: 50),
+          GridItem(.fixed(150), spacing: 50),
+      ]
+    
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM.yyyy.hh.mm"
+        formatter.dateFormat = "dd.MM.yyyy, hh:mm"
         return formatter}()
 
     
@@ -44,11 +49,16 @@ struct PrintDocumentsView: View {
                     
                     Spacer()
                 }.padding(.horizontal)
+                    .padding(.bottom, 10)
+                    .background(Color.white.ignoresSafeArea())
                                 
                 if dvm.docs.isEmpty {
                     Text("no docs")
                 } else {
-                    ScrollView {
+                    LazyVGrid(
+                    columns: columns,
+                    alignment: .center
+                ) {
                         ForEach(dvm.docs, id: \.id) { doc in
                             
                             VStack(alignment: .leading) {
@@ -62,22 +72,30 @@ struct PrintDocumentsView: View {
                                     .frame(maxWidth: 150)
                                     .lineLimit(1)
                                 
-                                Text(dateFormatter.string(from: doc.timeTaken!))
-                                    .font(Font.system(size: 12))
-                                    .foregroundStyle(.gray)
-                                    .frame(maxWidth: 150)
-                                    .lineLimit(1)
+                                HStack {
+                                    Text(dateFormatter.string(from: doc.timeTaken!))
+                                        .font(Font.system(size: 12))
+                                        .foregroundStyle(.gray)
+                                        .lineLimit(1)
                                     
-                            }.padding(5)
+                                    Spacer()
+                                    
+                                    NavigationLink{} label: {
+                                        Image(systemName: "list.bullet.circle.fill")
+                                            .foregroundStyle(.gray.opacity(0.5))
+                                    }
+                                    
+                                }.frame(maxWidth: 150)
+                            }.padding(10)
                             .background(RoundedRectangle(cornerRadius: 15)
                                 .foregroundStyle(.white))
-                                .shadow(radius: 5)
+                            .shadow(color: .gray.opacity(0.3), radius: 5)
                         }
                     }.frame(maxWidth: .infinity)
-                    .background(Color.gray.opacity(0.1).ignoresSafeArea())
+                    
                 }
                 Spacer()
-            }
+            }.background(Color.gray.opacity(0.1).ignoresSafeArea())
             
         } .onAppear {dvm.getDocs()}
     }
