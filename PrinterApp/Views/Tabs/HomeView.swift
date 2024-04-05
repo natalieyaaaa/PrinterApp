@@ -122,6 +122,11 @@ struct HomeView: View {
                 PrintWebView()
                     .environmentObject(pvm)
             })
+        
+            .fullScreenCover(isPresented: $isShowinпDocsPrint, content: {
+                PrintDocumentsView()
+                    .environmentObject(pvm)
+            })
     }
     
 }
