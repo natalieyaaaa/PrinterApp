@@ -13,6 +13,7 @@
 		203098972BBF3FB000CAF67D /* Documents.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 203098952BBF3FB000CAF67D /* Documents.xcdatamodeld */; };
 		203098992BBF40C700CAF67D /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203098982BBF40C700CAF67D /* CoreDataManager.swift */; };
 		2030989B2BBF47A300CAF67D /* PrintDocumentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2030989A2BBF47A300CAF67D /* PrintDocumentsView.swift */; };
+		20429E762BC139A700F34B6D /* ScrollDocsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20429E752BC139A700F34B6D /* ScrollDocsView.swift */; };
 		205038082BA38FCE008B69B4 /* ScannerUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205038072BA38FCE008B69B4 /* ScannerUIController.swift */; };
 		20917E582BB72613001F4ADC /* PrinterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20917E572BB72613001F4ADC /* PrinterViewModel.swift */; };
 		20B1E4952BA1BB0500DBA0C4 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B1E4942BA1BB0500DBA0C4 /* SettingsView.swift */; };
@@ -35,6 +36,7 @@
 		203098962BBF3FB000CAF67D /* Documents.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Documents.xcdatamodel; sourceTree = "<group>"; };
 		203098982BBF40C700CAF67D /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		2030989A2BBF47A300CAF67D /* PrintDocumentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintDocumentsView.swift; sourceTree = "<group>"; };
+		20429E752BC139A700F34B6D /* ScrollDocsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollDocsView.swift; sourceTree = "<group>"; };
 		205038072BA38FCE008B69B4 /* ScannerUIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerUIController.swift; sourceTree = "<group>"; };
 		20917E562BB718E5001F4ADC /* PrinterApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PrinterApp.entitlements; sourceTree = "<group>"; };
 		20917E572BB72613001F4ADC /* PrinterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrinterViewModel.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				2030988D2BBDA62300CAF67D /* PrintWebView.swift */,
 				20F5A7802BB55EEF00DB65C2 /* ProView.swift */,
 				2087977F2BA6495900436F16 /* Tabs */,
+				20429E752BC139A700F34B6D /* ScrollDocsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -230,6 +233,7 @@
 				20E9F8B52BA0B4EC001A8785 /* HomeView.swift in Sources */,
 				20917E582BB72613001F4ADC /* PrinterViewModel.swift in Sources */,
 				203098992BBF40C700CAF67D /* CoreDataManager.swift in Sources */,
+				20429E762BC139A700F34B6D /* ScrollDocsView.swift in Sources */,
 				20C3FDAC2BBFF39E00D0CF62 /* DocsViewModel.swift in Sources */,
 				203098912BBF013A00CAF67D /* Custom.swift in Sources */,
 				205038082BA38FCE008B69B4 /* ScannerUIController.swift in Sources */,

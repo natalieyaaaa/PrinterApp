@@ -57,7 +57,8 @@ struct PrintDocumentsView: View {
                 } else {
                     LazyVGrid(
                     columns: columns,
-                    alignment: .center
+                    alignment: .center,
+                    spacing: 16
                 ) {
                         ForEach(dvm.docs, id: \.id) { doc in
                             
@@ -69,7 +70,7 @@ struct PrintDocumentsView: View {
                                 Text(doc.name!)
                                     .font(Font.headline.weight(.semibold))
                                     .foregroundStyle(.black)
-                                    .frame(maxWidth: 150)
+                                    .frame(width: 150)
                                     .lineLimit(1)
                                 
                                 HStack {
@@ -85,7 +86,7 @@ struct PrintDocumentsView: View {
                                             .foregroundStyle(.gray.opacity(0.5))
                                     }
                                     
-                                }.frame(maxWidth: 150)
+                                }.frame(width: 150)
                             }.padding(10)
                             .background(RoundedRectangle(cornerRadius: 15)
                                 .foregroundStyle(.white))
