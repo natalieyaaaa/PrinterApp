@@ -89,27 +89,22 @@ struct PrintWebView: View {
                 }
         }.onDisappear {
             inputURL = ""
-            showedURL = "https://www.google.com/"
         }
         
     }
     
     func generateGoogleSearchLink(query: String) -> String {
-        // Replace spaces in the query with plus signs
         let formattedQuery = query.replacingOccurrences(of: " ", with: "+")
-        // Construct the Google search link
         let link = "https://www.google.com/search?q=\(formattedQuery)"
         return link
     }
     
     func printWebPage() {
-        // Создаем экземпляр WKWebView
         
         guard showedURL != "" else { return }
         
             webView.loadURL(urlString: showedURL)
             
-            // Проверяем, доступен ли принтер
             guard UIPrintInteractionController.isPrintingAvailable else {
                 print("Принтер недоступен")
                 return
