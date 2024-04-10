@@ -94,3 +94,75 @@ struct SettingsOptions: View {
     }
 }
 
+struct DocView: View {
+    @EnvironmentObject var dvm: DocsViewModel
+    
+    @Binding var doc: Document
+    var body: some View {
+        
+        VStack(alignment: .leading) {
+            Image(uiImage: UIImage(data: doc.image!)!)
+                .resizable()
+                .frame(width: 150, height: 100)
+            
+            Text(doc.name!)
+                .font(Font.headline.weight(.semibold))
+                .foregroundStyle(.black)
+                .frame(width: 150)
+                .lineLimit(1)
+            
+            HStack {
+                Text(dateFormatter.string(from: doc.timeTaken!))
+                    .font(Font.system(size: 12))
+                    .foregroundStyle(.gray)
+                    .lineLimit(1)
+                
+                Spacer()
+                
+                Menu {
+                    
+                    Button{
+                        pvm.imagesPrint.append(UIImage(data: doc.image!)!)
+                        pvm.printImages()
+                    } label: {
+                        Text("Print")
+                        Spacer()
+                        Image(systemName: "printer")
+                    }.frame(width: 80)
+                    
+                    Button {
+                        dvm.currentDoc = doc
+                        dvm.showChangeName = true
+                    } label: {
+                        Text("Rename")
+                        Spacer()
+                        Image(systemName: "pencil.line")
+                    }
+                    
+                    Button {
+                        dvm.currentDoc = doc
+                        dvm.showDeleteDoc = true
+                    } label: {
+                        Text("Delete")
+                        Spacer()
+                        Image(systemName: "trash")
+                    }
+                    
+                    
+                    Button {
+                        dvm.shareImage = Image(UIImage(data: doc.image))
+                    } label: {
+                        Image(systemName: "list.bullet.circle.fill")
+                            .foregroundStyle(.gray.opacity(0.5))
+                    }
+                }
+                    
+                    
+                }.frame(width: 150)
+            }.padding(10)
+                .background(RoundedRectangle(cornerRadius: 15)
+                    .foregroundStyle(.white))
+                .shadow(color: .gray.opacity(0.3), radius: 5)
+    }
+}
+

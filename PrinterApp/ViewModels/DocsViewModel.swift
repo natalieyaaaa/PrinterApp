@@ -7,10 +7,17 @@
 
 import Foundation
 import CoreData
+import SwiftUI
 
 final class DocsViewModel: ObservableObject {
     
     @Published var docs = [Document]()
+    
+    @Published var showChangeName = false
+    @Published var showDeleteDoc = false
+    @Published var newDocName = ""
+    @Published var currentDoc: Document?
+    @Published var shareImage: Image?
     
     var coreData = CoreDataManager.shared
     
@@ -19,6 +26,19 @@ final class DocsViewModel: ObservableObject {
     }
     
      init() {
+        getDocs()
+    }
+    
+    func renameDoc() {
+        guard currentDoc != nil else {return}
+       currentDoc!.name = newDocName
+        coreData.updateEntity()
+        newDocName = ""
+    }
+    
+    func deleteDoc() {
+        guard currentDoc != nil else {return}
+        coreData.deleteEntity(entity: currentDoc!)
         getDocs()
     }
 }

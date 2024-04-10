@@ -23,11 +23,6 @@ struct PrintDocumentsView: View {
         formatter.dateFormat = "dd.MM.yyyy, hh:mm"
         return formatter}()
     
-    @State var showChangeName = false
-    @State var showDeleteDoc = false
-    @State var newDocName = ""
-    @State var currentDoc: Document?
-    
     var body: some View {
         NavigationView {
             VStack {
@@ -57,7 +52,11 @@ struct PrintDocumentsView: View {
                     .background(Color.white.ignoresSafeArea())
                 
                 if dvm.docs.isEmpty {
-                    Text("no docs")
+                    Spacer()
+                    Text("No documents yet")
+                        .font(Font.title2)
+                    Spacer()
+                    
                 } else {
                     LazyVGrid(
                         columns: columns,
@@ -97,8 +96,8 @@ struct PrintDocumentsView: View {
                                         }.frame(width: 80)
                                         
                                         Button {
-                                            currentDoc = doc
-                                            showChangeName = true
+                                            dvm.currentDoc = doc
+                                            dvm.showChangeName = true
                                         } label: {
                                             Text("Rename")
                                             Spacer()
@@ -106,57 +105,54 @@ struct PrintDocumentsView: View {
                                         }
                                         
                                         Button {
-                                            currentDoc = doc
-                                            showDeleteDoc = true
+                                            dvm.currentDoc = doc
+                                            dvm.showDeleteDoc = true
                                         } label: {
                                             Text("Delete")
                                             Spacer()
                                             Image(systemName: "trash")
                                         }
                                         
-                                    } label: {
-                                        Image(systemName: "list.bullet.circle.fill")
-                                            .foregroundStyle(.gray.opacity(0.5))
+                                        
+                                        Button {
+                                            dvm.shareImage = Image(UIImage(data: doc.image))
+                                        } label: {
+                                            Image(systemName: "list.bullet.circle.fill")
+                                                .foregroundStyle(.gray.opacity(0.5))
+                                        }
                                     }
-                                    
-                                    
-                                    
-                                }.frame(width: 150)
-                            }.padding(10)
-                                .background(RoundedRectangle(cornerRadius: 15)
-                                    .foregroundStyle(.white))
-                                .shadow(color: .gray.opacity(0.3), radius: 5)
-                        }
-                    }.frame(maxWidth: .infinity)
+                                        
+                                        
+                                    }.frame(width: 150)
+                                }.padding(10)
+                                    .background(RoundedRectangle(cornerRadius: 15)
+                                        .foregroundStyle(.white))
+                                    .shadow(color: .gray.opacity(0.3), radius: 5)
+                            }
+                        }.frame(maxWidth: .infinity)
+                        
+                    }
                     
-                }
+                    Spacer()
+                    
+                }.background(Color.gray.opacity(0.1).ignoresSafeArea())
                 
-                Spacer()
-                
-            }.background(Color.gray.opacity(0.1).ignoresSafeArea())
+            } .onAppear {dvm.getDocs()}
             
-        } .onAppear {dvm.getDocs()}
+            .alert("Rename document", isPresented: $dvm.showChangeName) {
+                TextField("Type new name...", text: $dvm.newDocName)
+                Button("OK", action: {dvm.renameDoc()})
+                    Button("Cancel", role: .cancel) {}
+                }
         
-            .alert("Rename document", isPresented: $showChangeName) {
-                TextField("Type new name...", text: $newDocName)
-                Button("OK", action: {
-                    guard currentDoc != nil else {return}
-                    currentDoc!.name = newDocName
-                    dvm.coreData.updateEntity()
-                    newDocName = ""})
-                Button("Cancel", role: .cancel) {}
-            }
-            .alert("Are you sure you want to delete this?", isPresented: $showDeleteDoc) {
-                Button("Yes", action: {
-                    guard currentDoc != nil else {return}
-                    dvm.coreData.deleteEntity(entity: currentDoc!)
-                    dvm.getDocs()})
-                Button("No", role: .cancel) {}
-            }
+            .alert("Are you sure you want to delete this?", isPresented: $dvm.showDeleteDoc) {
+                Button("Yes", action: {dvm.deleteDoc()})
+                    Button("No", role: .cancel) {}
+                }
+        }
     }
-}
-
-#Preview {
-    PrintDocumentsView()
-        .environmentObject(PrinterViewModel())
-}
+    
+    #Preview {
+        PrintDocumentsView()
+            .environmentObject(PrinterViewModel())
+    }
