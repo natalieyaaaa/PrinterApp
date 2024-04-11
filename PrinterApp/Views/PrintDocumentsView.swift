@@ -64,26 +64,37 @@ struct PrintDocumentsView: View {
                         spacing: 16
                     ) {
                         ForEach(dvm.docs, id: \.id) { doc in
-                            
-                            VStack(alignment: .leading) {
-                                Image(uiImage: UIImage(data: doc.image!)!)
-                                    .resizable()
-                                    .frame(width: 150, height: 100)
-                                
-                                Text(doc.name!)
-                                    .font(Font.headline.weight(.semibold))
-                                    .foregroundStyle(.black)
-                                    .frame(width: 150)
-                                    .lineLimit(1)
-                                
-                                HStack {
-                                    Text(dateFormatter.string(from: doc.timeTaken!))
-                                        .font(Font.system(size: 12))
-                                        .foregroundStyle(.gray)
+                            NavigationLink{
+                                ScrollDocsView()
+                                    .environmentObject(dvm)
+                            } label: {
+                                VStack(alignment: .leading) {
+                                    Image(uiImage: UIImage(data: doc.image!)!)
+                                        .resizable()
+                                        .frame(width: 150, height: 100)
+                                    
+                                    Text(doc.name!)
+                                        .font(Font.headline.weight(.semibold))
+                                        .foregroundStyle(.black)
+                                        .frame(width: 150)
                                         .lineLimit(1)
                                     
-                                    Spacer()
-                                    
+                                    HStack {
+                                        Text(dateFormatter.string(from: doc.timeTaken!))
+                                            .font(Font.system(size: 12))
+                                            .foregroundStyle(.gray)
+                                            .lineLimit(1)
+                                        
+                                        Spacer()
+                                        
+                                    }.frame(width: 150)
+                                }.padding(10)
+                                    .background(RoundedRectangle(cornerRadius: 15)
+                                        .foregroundStyle(.white))
+                                    .shadow(color: .gray.opacity(0.3), radius: 5)
+                                
+                            } .overlay(alignment: .bottomTrailing) {
+                                VStack {
                                     Menu {
                                         
                                         Button{
@@ -112,47 +123,38 @@ struct PrintDocumentsView: View {
                                             Spacer()
                                             Image(systemName: "trash")
                                         }
-                                        
-                                        
-                                        Button {
-                                            dvm.shareImage = Image(UIImage(data: doc.image))
-                                        } label: {
-                                            Image(systemName: "list.bullet.circle.fill")
-                                                .foregroundStyle(.gray.opacity(0.5))
-                                        }
-                                    }
-                                        
-                                        
-                                    }.frame(width: 150)
-                                }.padding(10)
-                                    .background(RoundedRectangle(cornerRadius: 15)
-                                        .foregroundStyle(.white))
-                                    .shadow(color: .gray.opacity(0.3), radius: 5)
+                                    } label: {
+                                        Image(systemName: "list.bullet.circle.fill")
+                                            .foregroundStyle(.gray.opacity(0.5))
+                                    }    
+                                }.padding(5)
                             }
-                        }.frame(maxWidth: .infinity)
-                        
-                    }
+
+                        }
+                    }.frame(maxWidth: .infinity)
                     
-                    Spacer()
-                    
-                }.background(Color.gray.opacity(0.1).ignoresSafeArea())
+                }
                 
-            } .onAppear {dvm.getDocs()}
+                Spacer()
+                
+            }.background(Color.gray.opacity(0.1).ignoresSafeArea())
             
+        } .onAppear {dvm.getDocs()}
+        
             .alert("Rename document", isPresented: $dvm.showChangeName) {
                 TextField("Type new name...", text: $dvm.newDocName)
                 Button("OK", action: {dvm.renameDoc()})
-                    Button("Cancel", role: .cancel) {}
-                }
+                Button("Cancel", role: .cancel) {}
+            }
         
             .alert("Are you sure you want to delete this?", isPresented: $dvm.showDeleteDoc) {
                 Button("Yes", action: {dvm.deleteDoc()})
-                    Button("No", role: .cancel) {}
-                }
-        }
+                Button("No", role: .cancel) {}
+            }
     }
-    
-    #Preview {
-        PrintDocumentsView()
-            .environmentObject(PrinterViewModel())
-    }
+}
+
+#Preview {
+    PrintDocumentsView()
+        .environmentObject(PrinterViewModel())
+}
