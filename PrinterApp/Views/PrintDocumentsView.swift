@@ -65,8 +65,10 @@ struct PrintDocumentsView: View {
                     ) {
                         ForEach(dvm.docs, id: \.id) { doc in
                             NavigationLink{
-                                ScrollDocsView()
+                                ScrollDocsView(doc: doc)
                                     .environmentObject(dvm)
+                                    .navigationBarBackButtonHidden()
+                                
                             } label: {
                                 VStack(alignment: .leading) {
                                     Image(uiImage: UIImage(data: doc.image!)!)

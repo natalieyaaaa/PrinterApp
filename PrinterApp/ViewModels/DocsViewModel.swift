@@ -42,4 +42,32 @@ final class DocsViewModel: ObservableObject {
         getDocs()
     }
     
+    func shareImage() {
+          guard let image = UIImage(named: "example_image") else {
+              return
+          }
+          
+          // Save the image to a temporary file
+          do {
+              let fileURL = try saveImageToTemporaryFile(image: image)
+              
+              // Share the temporary file
+              if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                  if let rootViewController = windowScene.windows.first?.rootViewController {
+                      let vc = UIActivityViewController(activityItems: [fileURL], applicationActivities: nil)
+                      rootViewController.present(vc, animated: true)
+                  }
+              }
+          } catch {
+              print("Error saving image to temporary file: \(error)")
+          }
+      }
+      
+      func saveImageToTemporaryFile(image: UIImage) throws -> URL {
+          let temporaryDirectory = FileManager.default.temporaryDirectory
+          let fileURL = temporaryDirectory.appendingPathComponent("shared_image.jpg")
+          let imageData = image.jpegData(compressionQuality: 1.0)
+          try imageData?.write(to: fileURL)
+          return fileURL
+      }
 }
