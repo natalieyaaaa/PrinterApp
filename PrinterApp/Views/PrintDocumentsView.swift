@@ -13,10 +13,7 @@ struct PrintDocumentsView: View {
     @EnvironmentObject var pvm: PrinterViewModel
     @Environment(\.dismiss) var dismiss
     
-    private var columns: [GridItem] = [
-        GridItem(.fixed(150), spacing: 50),
-        GridItem(.fixed(150), spacing: 50),
-    ]
+    
     
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -59,16 +56,19 @@ struct PrintDocumentsView: View {
                     
                 } else {
                     LazyVGrid(
-                        columns: columns,
+                        columns: [
+                            GridItem(.fixed(150), spacing: 50),
+                            GridItem(.fixed(150), spacing: 50),
+                        ],
                         alignment: .center,
                         spacing: 16
                     ) {
                         ForEach(dvm.docs, id: \.id) { doc in
-                            NavigationLink{
-                                ScrollDocsView(doc: doc)
+                            NavigationLink {
+                                ScrollDocsView(selection: doc.id)
                                     .environmentObject(dvm)
+                                    .environmentObject(pvm)
                                     .navigationBarBackButtonHidden()
-                                
                             } label: {
                                 VStack(alignment: .leading) {
                                     Image(uiImage: UIImage(data: doc.image!)!)
@@ -128,7 +128,7 @@ struct PrintDocumentsView: View {
                                     } label: {
                                         Image(systemName: "list.bullet.circle.fill")
                                             .foregroundStyle(.gray.opacity(0.5))
-                                    }    
+                                    }
                                 }.padding(5)
                             }
 

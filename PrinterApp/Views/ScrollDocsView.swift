@@ -13,10 +13,10 @@ struct ScrollDocsView: View {
     @EnvironmentObject var pvm: PrinterViewModel
     @Environment(\.dismiss) var dismiss
     
-    @State var selection = 1
+    @State var selection: ObjectIdentifier = ObjectIdentifier(Document())
     
-    var doc: Document?
     @State var name = ""
+    
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM.yyyy, hh:mm"
@@ -31,12 +31,12 @@ struct ScrollDocsView: View {
                         .font(.title3)
                 }
                 
-                Text(doc?.name ?? "")
+                Text(dvm.docs.first(where: { $0.id == selection })?.name ?? "")
                     .font(Font.title2.weight(.semibold))
                     .frame(maxWidth: 300)
                 
                 Button {
-                    pvm.imagesPrint.append(UIImage(data: doc!.image!)!)
+                    pvm.imagesPrint.append(UIImage(data: dvm.docs.first(where: { $0.id == selection })!.image!)!)
                     pvm.printImages()
                 } label: {
                     Image(systemName: "printer")
@@ -48,37 +48,37 @@ struct ScrollDocsView: View {
                 .background(Color.white.ignoresSafeArea())
             
             TabView(selection: $selection) {
-                ForEach(dvm.docs.indices, id: \.self) { index in
-                    Image(uiImage: UIImage(data: dvm.docs[index].image!)!)
+                ForEach(dvm.docs, id: \.id) { id in
+                    Image(uiImage: UIImage(data: id.image!)!)
                         .resizable()
                         .frame(width: 300, height: 200)
                         .padding(10)
                         .background(RoundedRectangle(cornerRadius: 15).foregroundStyle(.white))
                         .shadow(color: .gray.opacity(0.3), radius: 5)
-                        .tag(index)
-                        .onAppear {selection = index}
-                        
+                        .tag(id)
                 }
             }.tabViewStyle(.page)
             
             HStack {
-                if selection > 1 {
-                    Button{
-                       
-                            selection -= 1
-                        } label: {
-                        Image(systemName: "arrow.left")
-                    }
-                }
-                Text("\(selection)").font(Font.headline.weight(.semibold))
-                if selection < dvm.docs.count {
-                    Button{
-                        
-                            selection += 1
-                        } label: {
-                        Image(systemName: "arrow.right")
-                    }
-                }
+//                if selection > 1 {
+//                    Button{
+//                        withAnimation {
+//                            selection -= 1
+//                        }
+//                        } label: {
+//                        Image(systemName: "arrow.left")
+//                    }
+//                }
+//                Text("\(selection)").font(Font.headline.weight(.semibold))
+//                if selection < dvm.docs.count {
+//                    Button{
+//                        withAnimation {
+//                            selection += 1
+//                        }
+//                        } label: {
+//                        Image(systemName: "arrow.right")
+//                    }
+//                }
             }.padding()
                 .frame(width: 100)
             
@@ -109,9 +109,9 @@ struct ScrollDocsView: View {
 }
 
 
-#Preview {
-    ScrollDocsView()
-        .environmentObject(DocsViewModel())
-        .environmentObject(PrinterViewModel())
-}
+//#Preview {
+//    ScrollDocsView()
+//        .environmentObject(DocsViewModel())
+//        .environmentObject(PrinterViewModel())
+//}
 
