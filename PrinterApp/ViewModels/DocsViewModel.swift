@@ -16,8 +16,7 @@ final class DocsViewModel: ObservableObject {
     @Published var showChangeName = false
     @Published var showDeleteDoc = false
     @Published var newDocName = ""
-    @Published var currentDoc: Document?
-    @Published var sharedImage: Image?
+//    @Published var sharedImage: Image?
     
     var coreData = CoreDataManager.shared
     
@@ -29,16 +28,14 @@ final class DocsViewModel: ObservableObject {
         getDocs()
     }
     
-    func renameDoc() {
-        guard currentDoc != nil else {return}
-        currentDoc!.name = newDocName
+    func renameDoc(entity: Document) {
+        entity.name = newDocName
         coreData.updateEntity()
         newDocName = ""
     }
     
-    func deleteDoc() {
-        guard currentDoc != nil else {return}
-        coreData.deleteEntity(entity: currentDoc!)
+    func deleteDoc(entity: Document) {
+        coreData.deleteEntity(entity: entity)
         getDocs()
     }
     

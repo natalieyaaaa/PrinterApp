@@ -78,7 +78,7 @@ extension DocumentScannerView {
             if !scannedImages.isEmpty {
                 for photo in scannedImages {
                     let imageData = photo.pngData()!
-                    coreData.saveEntity(image: imageData, name: "PNG_\(currentDate.formatted(date: .abbreviated, time: .omitted))_Scanned", timeTaken: currentDate)
+                    coreData.saveEntity(image: imageData, name: "PNG_\(currentDate.formatted(date: .abbreviated, time: .standard))_Scanned", timeTaken: currentDate)
                 }
             }
             parent.onCompletion(.success(parent.scannedImages))

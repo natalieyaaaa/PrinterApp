@@ -13,7 +13,7 @@ struct PrintDocumentsView: View {
     @EnvironmentObject var pvm: PrinterViewModel
     @Environment(\.dismiss) var dismiss
     
-    
+    @State var selected = 0
     
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -63,26 +63,26 @@ struct PrintDocumentsView: View {
                         alignment: .center,
                         spacing: 16
                     ) {
-                        ForEach(dvm.docs, id: \.id) { doc in
+                        ForEach(dvm.docs.indices, id: \.self) { index in
                             NavigationLink {
-                                ScrollDocsView(selection: doc.id)
+                                ScrollDocsView(selection: index)
                                     .environmentObject(dvm)
                                     .environmentObject(pvm)
                                     .navigationBarBackButtonHidden()
                             } label: {
                                 VStack(alignment: .leading) {
-                                    Image(uiImage: UIImage(data: doc.image!)!)
+                                    Image(uiImage: UIImage(data: dvm.docs[index].image!)!)
                                         .resizable()
                                         .frame(width: 150, height: 100)
                                     
-                                    Text(doc.name!)
+                                    Text(dvm.docs[index].name!)
                                         .font(Font.headline.weight(.semibold))
                                         .foregroundStyle(.black)
                                         .frame(width: 150)
                                         .lineLimit(1)
                                     
                                     HStack {
-                                        Text(dateFormatter.string(from: doc.timeTaken!))
+                                        Text(dateFormatter.string(from: dvm.docs[index].timeTaken!))
                                             .font(Font.system(size: 12))
                                             .foregroundStyle(.gray)
                                             .lineLimit(1)
@@ -100,7 +100,7 @@ struct PrintDocumentsView: View {
                                     Menu {
                                         
                                         Button{
-                                            pvm.imagesPrint.append(UIImage(data: doc.image!)!)
+                                            pvm.imagesPrint.append(UIImage(data: dvm.docs[index].image!)!)
                                             pvm.printImages()
                                         } label: {
                                             Text("Print")
@@ -109,7 +109,7 @@ struct PrintDocumentsView: View {
                                         }.frame(width: 80)
                                         
                                         Button {
-                                            dvm.currentDoc = doc
+                                            selected = index
                                             dvm.showChangeName = true
                                         } label: {
                                             Text("Rename")
@@ -118,7 +118,7 @@ struct PrintDocumentsView: View {
                                         }
                                         
                                         Button {
-                                            dvm.currentDoc = doc
+                                            selected = index
                                             dvm.showDeleteDoc = true
                                         } label: {
                                             Text("Delete")
@@ -145,18 +145,18 @@ struct PrintDocumentsView: View {
         
             .alert("Rename document", isPresented: $dvm.showChangeName) {
                 TextField("Type new name...", text: $dvm.newDocName)
-                Button("OK", action: {dvm.renameDoc()})
+                Button("OK", action: {dvm.renameDoc(entity: dvm.docs[selected])})
                 Button("Cancel", role: .cancel) {}
             }
         
             .alert("Are you sure you want to delete this?", isPresented: $dvm.showDeleteDoc) {
-                Button("Yes", action: {dvm.deleteDoc()})
+                Button("Yes", action: {dvm.deleteDoc(entity: dvm.docs[selected])})
                 Button("No", role: .cancel) {}
             }
     }
 }
 
-#Preview {
-    PrintDocumentsView()
-        .environmentObject(PrinterViewModel())
-}
+//#Preview {
+//    PrintDocumentsView()
+//        .environmentObject(PrinterViewModel())
+//}
