@@ -14,6 +14,7 @@ struct PrintDocumentsView: View {
     @Environment(\.dismiss) var dismiss
     
     @State var selected = 0
+    @State var showShareSheet = false
     
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -39,9 +40,7 @@ struct PrintDocumentsView: View {
                             .font(Font.title2.weight(.semibold))
                             .foregroundStyle(.black.opacity(0.8))
                             .padding(.trailing)
-                    }.background(RoundedRectangle(cornerRadius: 30)
-                        .foregroundStyle(.gray.opacity(0.2))
-                        .shadow(color: .gray.opacity(0.5), radius: 13, y: 8))
+                    }
                     
                     Spacer()
                 }.padding(.horizontal)
@@ -125,6 +124,7 @@ struct PrintDocumentsView: View {
                                             Spacer()
                                             Image(systemName: "trash")
                                         }
+                                     
                                     } label: {
                                         Image(systemName: "list.bullet.circle.fill")
                                             .foregroundStyle(.gray.opacity(0.5))
@@ -153,10 +153,6 @@ struct PrintDocumentsView: View {
                 Button("Yes", action: {dvm.deleteDoc(entity: dvm.docs[selected])})
                 Button("No", role: .cancel) {}
             }
+
     }
 }
-
-//#Preview {
-//    PrintDocumentsView()
-//        .environmentObject(PrinterViewModel())
-//}

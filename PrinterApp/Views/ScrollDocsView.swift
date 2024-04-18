@@ -50,26 +50,32 @@ struct ScrollDocsView: View {
                 .padding(.bottom, 10)
                 .background(Color.white.ignoresSafeArea())
             
-            TabView(selection: $selection) {
-                ForEach(dvm.docs.indices, id: \.self) { index in
-                    
-                    VStack(spacing: 10) {
-                        Text(dvm.docs[index].name!)
-                            .padding(10)
-                            .font(Font.system(size: 15))
-                            .background(RoundedRectangle(cornerRadius: 15).foregroundStyle(.white))
+            if !dvm.docs.isEmpty {
+                TabView(selection: $selection) {
+                    ForEach(dvm.docs.indices, id: \.self) { index in
                         
-                        Image(uiImage: UIImage(data: dvm.docs[index].image!)!)
-                            .resizable()
-                            .frame(width: 300, height: 200)
-                            .padding(10)
-                            .background(RoundedRectangle(cornerRadius: 15).foregroundStyle(.white))
-                            .shadow(color: .gray.opacity(0.3), radius: 5)
-                            .tag(index)
+                        VStack(spacing: 10) {
+                            Text(dvm.docs[index].name!)
+                                .padding(10)
+                                .font(Font.system(size: 15))
+                                .background(RoundedRectangle(cornerRadius: 15).foregroundStyle(.white))
+                            
+                            Image(uiImage: UIImage(data: dvm.docs[index].image!)!)
+                                .resizable()
+                                .frame(width: 300, height: 200)
+                                .padding(10)
+                                .background(RoundedRectangle(cornerRadius: 15).foregroundStyle(.white))
+                                .shadow(color: .gray.opacity(0.3), radius: 5)
+                                .tag(index)
+                        }
                     }
-                }
-            }.tabViewStyle(PageTabViewStyle.init(indexDisplayMode: .never))
-
+                }.tabViewStyle(PageTabViewStyle.init(indexDisplayMode: .never))
+            } else {
+                Spacer()
+                Text("No documents yet")
+                    .font(Font.title2)
+                Spacer()
+            }
             
             Spacer()
 
@@ -101,9 +107,10 @@ struct ScrollDocsView: View {
                             Text("Rename")
                                 .font(Font.headline.weight(.semibold))
                     }
-                }.padding(.vertical)
+                }
                 
-            }.padding(.top, 10)
+            }.padding(.top, 20)
+                .padding(.horizontal)
                 .frame(maxWidth: .infinity)
                 .background(Color.white.ignoresSafeArea())
             
@@ -133,9 +140,9 @@ struct ScrollDocsView: View {
 }
 
 
-//#Preview {
-//    ScrollDocsView()
-//        .environmentObject(DocsViewModel())
-//        .environmentObject(PrinterViewModel())
-//}
+#Preview {
+    ScrollDocsView()
+        .environmentObject(DocsViewModel())
+        .environmentObject(PrinterViewModel())
+}
 

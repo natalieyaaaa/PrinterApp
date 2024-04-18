@@ -36,9 +36,7 @@ struct PrintTextView: View {
                             .font(Font.title2.weight(.semibold))
                             .foregroundStyle(.black.opacity(0.8))
                             .padding(.trailing)
-                    }.background(RoundedRectangle(cornerRadius: 30)
-                        .foregroundStyle(.gray.opacity(0.2))
-                        .shadow(color: .gray.opacity(0.5), radius: 13, y: 8))
+                    }
                     
                     Spacer()
                     

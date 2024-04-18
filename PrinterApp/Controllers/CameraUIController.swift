@@ -39,6 +39,5 @@ struct CameraView: UIViewControllerRepresentable {
     }
     
     func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {
-        // No need to update anything here
     }
 }
