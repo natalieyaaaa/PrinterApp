@@ -16,6 +16,7 @@ final class DocsViewModel: ObservableObject {
     @Published var showDeleteDoc = false
     @Published var newDocName = ""
     
+    
     var coreData = CoreDataManager.shared
     
     func getDocs() {

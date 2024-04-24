@@ -21,6 +21,7 @@ struct HomeView: View {
     @State private var isShowinпDocsPrint = false
             
     var body: some View {
+        
         VStack {
             HStack {
                 Text("**Printer**")

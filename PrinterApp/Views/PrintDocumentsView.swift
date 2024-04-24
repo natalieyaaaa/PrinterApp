@@ -16,6 +16,8 @@ struct PrintDocumentsView: View {
     @State var selected = 0
     @State var showShareSheet = false
     
+    @State var shareImage: PickedImage?
+
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM.yyyy, hh:mm"
@@ -124,6 +126,14 @@ struct PrintDocumentsView: View {
                                             Spacer()
                                             Image(systemName: "trash")
                                         }
+                                        
+                                        Button {
+                                            shareImage = PickedImage(image: UIImage(data: dvm.docs[index].image!)!)
+                                        } label: {
+                                            Text("wecw")
+                                            Spacer()
+                                            Image(systemName: "arrow.up")
+                                        }
                                      
                                     } label: {
                                         Image(systemName: "list.bullet.circle.fill")
@@ -140,6 +150,9 @@ struct PrintDocumentsView: View {
                 Spacer()
                 
             }.background(Color.gray.opacity(0.1).ignoresSafeArea())
+                .sheet(item: $shareImage) { image in
+                    ActivityViewController(itemsToShare: [image.image.jpegData(compressionQuality: 1.0)!])
+                }
             
         } .onAppear {dvm.getDocs()}
         
@@ -153,6 +166,24 @@ struct PrintDocumentsView: View {
                 Button("Yes", action: {dvm.deleteDoc(entity: dvm.docs[selected])})
                 Button("No", role: .cancel) {}
             }
-
+          
     }
+}
+
+
+struct ActivityViewController: UIViewControllerRepresentable {
+    var itemsToShare: [Any]
+    var servicesToShareItem: [UIActivity]? = nil
+    func makeUIViewController(context: UIViewControllerRepresentableContext<ActivityViewController>) -> UIActivityViewController {
+        let controller = UIActivityViewController(activityItems: itemsToShare, applicationActivities: servicesToShareItem)
+        return controller
+    }
+    func updateUIViewController(_ uiViewController: UIActivityViewController,
+                                context: UIViewControllerRepresentableContext<ActivityViewController>) {}
+}
+
+
+struct PickedImage: Identifiable {
+    var id = UUID()
+    var image: UIImage
 }

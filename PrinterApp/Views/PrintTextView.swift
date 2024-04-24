@@ -72,7 +72,7 @@ struct PrintTextView: View {
                 
                 Button {
                     guard pvm.textPrint != "" else {showAlert = true; return}
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {pvm.printText()}
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {pvm.printText()}
                     dismiss()
                     
                 }label: {
