@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import StoreKit
+
 
 struct OnBoardingBottom: View {
     
@@ -34,10 +36,11 @@ struct OnBoardingBottom: View {
     }
 }
 
+
 struct OnBoardingDownTemplate: View {
     
     @Binding var selectedTab: OnBoardingBottom.Tabs
-    
+
     var title: String
     var text: String
     var image: String
@@ -73,6 +76,10 @@ struct OnBoardingDownTemplate: View {
                         switch selectedTab {
                         case .first:
                             selectedTab = .second
+                            let scenes = UIApplication.shared.connectedScenes
+                            if let windowScene = scenes.first as? UIWindowScene {
+                                SKStoreReviewController.requestReview(in: windowScene)
+                            }
                         case .second:
                             selectedTab = .third
                         case .third:
