@@ -94,3 +94,68 @@ struct SettingsOptions: View {
     }
 }
 
+public struct BackgroundOB: View {
+    var image: String
+  public var body: some View {
+        ZStack {
+            Image("bgPrinter")
+                .padding(.trailing, 275.5)
+                .padding(.top, 70)
+                .padding(.bottom, 692.5)
+                .padding(.leading, 15)
+            
+            Image("bgFolder")
+                .padding(.trailing, 190)
+                .padding(.top, 35)
+                .padding(.bottom, 807)
+                .padding(.leading, 154)
+            
+            Image("bgFile")
+                .padding(.trailing, -8.7)
+                .padding(.top, 47)
+                .padding(.bottom, 726)
+                .padding(.leading, 277)
+            
+            Image("bgWifi")
+                .padding(.top, 244)
+                .padding(.bottom, 539)
+                .padding(.leading, 300)
+            
+            Image("bgFile2")
+                .padding(.trailing, 330)
+                .padding(.top, 293)
+                .padding(.bottom, 506)
+                .padding(.leading, -34)
+            
+            Image("bgPrinter2")
+                .padding(.trailing, -18)
+                .padding(.top, 442)
+                .padding(.bottom, 350)
+                .padding(.leading, 307)
+            
+            Image("bgFolder2")
+                .padding(.trailing, 292)
+                .padding(.top, 499)
+                .padding(.bottom, 284)
+                .padding(.leading, -27)
+            
+            Image(image)
+                .padding(.horizontal)
+                .padding(.top, 127)
+                .padding(.bottom, 199)
+            
+            VStack {
+                Spacer()
+                
+                Rectangle()
+                    .frame(width: .infinity, height: 422)
+                    .foregroundStyle(LinearGradient(stops: [
+                        Gradient.Stop(color: Color(.clear), location: 0.00),
+                        Gradient.Stop(color: Color(.white), location: 0.18),],
+                                                    startPoint: UnitPoint(x: 0.5, y: 0),
+                                                    endPoint: UnitPoint(x: 0.5, y: 1)
+                                                   ))
+            }
+        }
+    }
+}
