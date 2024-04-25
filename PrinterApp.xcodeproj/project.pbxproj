@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2015C3AF2BDAA32B006625BD /* OnBoardingUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2015C3AE2BDAA32B006625BD /* OnBoardingUp.swift */; };
 		2030988C2BBC052E00CAF67D /* PrintTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2030988B2BBC052E00CAF67D /* PrintTextView.swift */; };
 		2030988E2BBDA62300CAF67D /* PrintWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2030988D2BBDA62300CAF67D /* PrintWebView.swift */; };
 		203098912BBF013A00CAF67D /* Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203098902BBF013A00CAF67D /* Custom.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2015C3AE2BDAA32B006625BD /* OnBoardingUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingUp.swift; sourceTree = "<group>"; };
 		202D36A12BB2DEB200755462 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		2030988B2BBC052E00CAF67D /* PrintTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintTextView.swift; sourceTree = "<group>"; };
 		2030988D2BBDA62300CAF67D /* PrintWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintWebView.swift; sourceTree = "<group>"; };
@@ -64,6 +66,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2015C3AC2BDAA220006625BD /* OnBoarding */ = {
+			isa = PBXGroup;
+			children = (
+				2015C3AE2BDAA32B006625BD /* OnBoardingUp.swift */,
+			);
+			path = OnBoarding;
+			sourceTree = "<group>";
+		};
 		2030988F2BBF006600CAF67D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -103,6 +113,7 @@
 		20B1E4982BA1C39D00DBA0C4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2015C3AC2BDAA220006625BD /* OnBoarding */,
 				203098902BBF013A00CAF67D /* Custom.swift */,
 				20429E752BC139A700F34B6D /* ScrollDocsView.swift */,
 				20FAAB522BB778D9008B4EFA /* ImagePicker.swift */,
@@ -237,6 +248,7 @@
 				20C3FDAC2BBFF39E00D0CF62 /* DocsViewModel.swift in Sources */,
 				203098912BBF013A00CAF67D /* Custom.swift in Sources */,
 				205038082BA38FCE008B69B4 /* ScannerUIController.swift in Sources */,
+				2015C3AF2BDAA32B006625BD /* OnBoardingUp.swift in Sources */,
 				20F5A7812BB55EEF00DB65C2 /* ProView.swift in Sources */,
 				203098972BBF3FB000CAF67D /* Documents.xcdatamodeld in Sources */,
 				20B1E4952BA1BB0500DBA0C4 /* SettingsView.swift in Sources */,
