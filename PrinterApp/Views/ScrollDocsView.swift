@@ -14,7 +14,8 @@ struct ScrollDocsView: View {
     @Environment(\.dismiss) var dismiss
     
     @State var selection: Int = 0
-    
+    @State var shareImage: PickedImage?
+
     @State var name = ""
     
     let dateFormatter: DateFormatter = {
@@ -94,7 +95,18 @@ struct ScrollDocsView: View {
                     }
                 } .padding(.horizontal)
                 
-                Spacer()
+                Button {
+                    shareImage = PickedImage(image: UIImage(data: dvm.docs[selection].image!)!)
+                } label: {
+                    HStack {
+                        Image(systemName: "square.and.arrow.up")
+                            .renderingMode(.template)
+                            .foregroundStyle(.blue)
+                            .padding(.trailing)
+                        Text("Share")
+                            .font(Font.headline.weight(.semibold))
+                    }
+                }
                 
                 Button {
                     dvm.showChangeName = true
@@ -118,6 +130,10 @@ struct ScrollDocsView: View {
             dvm.getDocs()
         }
         .background(Color.gray.opacity(0.1).ignoresSafeArea())
+        
+        .sheet(item: $shareImage) { image in
+            ActivityViewController(itemsToShare: [image.image.jpegData(compressionQuality: 1.0)!])
+        }
         
         .alert("Are you sure you want to delete this?", isPresented: $dvm.showDeleteDoc) {
             Button("Yes", action: {

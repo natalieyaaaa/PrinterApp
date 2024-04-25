@@ -130,9 +130,9 @@ struct PrintDocumentsView: View {
                                         Button {
                                             shareImage = PickedImage(image: UIImage(data: dvm.docs[index].image!)!)
                                         } label: {
-                                            Text("wecw")
+                                            Text("Share")
                                             Spacer()
-                                            Image(systemName: "arrow.up")
+                                            Image(systemName: "square.and.arrow.up")
                                         }
                                      
                                     } label: {
@@ -171,19 +171,19 @@ struct PrintDocumentsView: View {
 }
 
 
-struct ActivityViewController: UIViewControllerRepresentable {
+public struct ActivityViewController: UIViewControllerRepresentable {
     var itemsToShare: [Any]
     var servicesToShareItem: [UIActivity]? = nil
-    func makeUIViewController(context: UIViewControllerRepresentableContext<ActivityViewController>) -> UIActivityViewController {
+    public func makeUIViewController(context: UIViewControllerRepresentableContext<ActivityViewController>) -> UIActivityViewController {
         let controller = UIActivityViewController(activityItems: itemsToShare, applicationActivities: servicesToShareItem)
         return controller
     }
-    func updateUIViewController(_ uiViewController: UIActivityViewController,
+    public func updateUIViewController(_ uiViewController: UIActivityViewController,
                                 context: UIViewControllerRepresentableContext<ActivityViewController>) {}
 }
 
 
-struct PickedImage: Identifiable {
-    var id = UUID()
+public struct PickedImage: Identifiable {
+    public var id = UUID()
     var image: UIImage
 }
