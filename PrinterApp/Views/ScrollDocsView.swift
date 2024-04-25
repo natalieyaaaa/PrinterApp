@@ -89,11 +89,12 @@ struct ScrollDocsView: View {
                             Image(systemName: "trash")
                                 .renderingMode(.template)
                                 .foregroundStyle(.blue)
-                                .padding(.trailing)
                             Text("Delete")
                                 .font(Font.headline.weight(.semibold))
                     }
                 } .padding(.horizontal)
+                
+                Spacer()
                 
                 Button {
                     shareImage = PickedImage(image: UIImage(data: dvm.docs[selection].image!)!)
@@ -102,11 +103,12 @@ struct ScrollDocsView: View {
                         Image(systemName: "square.and.arrow.up")
                             .renderingMode(.template)
                             .foregroundStyle(.blue)
-                            .padding(.trailing)
                         Text("Share")
                             .font(Font.headline.weight(.semibold))
                     }
                 }
+                
+                Spacer()
                 
                 Button {
                     dvm.showChangeName = true
@@ -115,7 +117,6 @@ struct ScrollDocsView: View {
                             Image(systemName: "pencil.line")
                                 .renderingMode(.template)
                                 .foregroundStyle(.blue)
-                                .padding(.trailing)
                             Text("Rename")
                                 .font(Font.headline.weight(.semibold))
                     }
