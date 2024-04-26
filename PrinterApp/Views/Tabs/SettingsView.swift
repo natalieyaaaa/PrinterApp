@@ -22,14 +22,14 @@ struct SettingsView: View {
                 
                 VStack(spacing: 16) {
                     
-                    NavigationLink{} label: {
-                        SettingsOptions(text: "Printer PRO", image: "pro.small")}
+                    Link(destination: URL(string: "https://www.apple.com")!, label: {
+                        SettingsOptions(text: "Printer PRO", image: "pro.small")})
                     
-                    NavigationLink{} label: {
-                        SettingsOptions(text: "FAQ", image: "FAQ")}
+                    Link(destination: URL(string: "https://www.apple.com")!, label: {
+                        SettingsOptions(text: "FAQ", image: "FAQ")})
                     
-                    NavigationLink{} label: {
-                        SettingsOptions(text: "Contact us", image: "mail")}
+                    Link(destination: URL(string: "https://www.apple.com")!,label: {
+                        SettingsOptions(text: "Contact us", image: "mail")})
                     
                     Button {
                         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
@@ -42,11 +42,11 @@ struct SettingsView: View {
                     } label: {
                         SettingsOptions(text: "Share", image: "share")}
                     
-                    NavigationLink{} label: {
-                        SettingsOptions(text: "Terms of Use", image: "notes")}
+                    Link(destination: URL(string: "https://www.apple.com")!, label: {
+                        SettingsOptions(text: "Terms of Use", image: "notes")})
                     
-                    NavigationLink{} label: {
-                        SettingsOptions(text: "Privacy Policy", image: "privacy")}
+                    Link(destination: URL(string: "https://www.apple.com")!, label: {
+                        SettingsOptions(text: "Privacy Policy", image: "privacy")})
                     
                 }.padding(.horizontal)
                 

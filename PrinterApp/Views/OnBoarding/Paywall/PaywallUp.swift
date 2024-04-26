@@ -11,6 +11,14 @@ struct PaywallUp: View {
     @State var isFreeTrial = false
     var body: some View {
                 VStack(spacing: 16) {
+                    
+                    Button {
+                        
+                    } label: {
+                        Image(systemName: "xmark")
+                            .foregroundStyle(.black)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }.padding(.leading)
                     Spacer()
                     
                     VStack(spacing: 8) {
@@ -36,9 +44,9 @@ struct PaywallUp: View {
                             .padding(.horizontal,16)
                         
                         Button {
-                            
+                            triggerHapticFeedback()
+
                         } label: {
-                            
                             VStack{
                                 Text(isFreeTrial ? "3-day Free Trial then $6.99/week" : "Subscribe for $6.99/week")
                                     .fontWeight(.medium)
@@ -48,11 +56,23 @@ struct PaywallUp: View {
                                     .foregroundStyle(.white)
                                     .font(Font.system(size: 15))
 
-                            }
-                        }.frame(maxWidth: .infinity)
-                            .padding()
-                        .background(RoundedRectangle(cornerRadius: 31).foregroundStyle(.obButton))
-                        .padding(.horizontal,16)
+                            }.frame(maxWidth: .infinity)
+                                .padding()
+                            .background(RoundedRectangle(cornerRadius: 33).foregroundStyle(.obButton))
+                        }.padding(.horizontal,16)
+                        
+                        HStack {
+                            Link(destination: URL(string: "https://www.apple.com")!, label: {
+                                Text("Privacy Policy")})
+                            Spacer()
+                            Link(destination: URL(string: "https://www.apple.com")!, label: {
+                                Text("Restore")})
+                            Spacer()
+                            Link(destination: URL(string: "https://www.apple.com")!, label: {
+                                Text("Terms of Use")})
+                        }.foregroundStyle(.gray)
+                            .font(Font.system(size: 15))
+                            .padding(.horizontal, 32)
                     
                     }
                 }.background(BackgroundOB(image: "paywallUp"))

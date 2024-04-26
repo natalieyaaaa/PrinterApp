@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import UIKit
 
 struct PrintOption: View {
     
@@ -140,22 +141,32 @@ public struct BackgroundOB: View {
                 .padding(.leading, -27)
             
             Image(image)
+              
                 .padding(.horizontal)
                 .padding(.top, 127)
-                .padding(.bottom, 199)
+                .padding(.bottom, 230)
             
             VStack {
                 Spacer()
                 
                 Rectangle()
-                    .frame(width: .infinity, height: 422)
-                    .foregroundStyle(LinearGradient(stops: [
-                        Gradient.Stop(color: Color(.clear), location: 0.00),
-                        Gradient.Stop(color: Color(.white), location: 0.18),],
-                                                    startPoint: UnitPoint(x: 0.5, y: 0),
-                                                    endPoint: UnitPoint(x: 0.5, y: 1)
-                                                   ))
+                    .frame(width: .infinity, height: 450)
+                    .foregroundStyle(LinearGradient(
+                        stops: [
+                        Gradient.Stop(color: Color(red: 0.96, green: 0.97, blue: 1).opacity(0), location: 0.00),
+                        Gradient.Stop(color: Color(red: 0.96, green: 0.97, blue: 1).opacity(0.8), location: 0.10),
+                        Gradient.Stop(color: Color(red: 0.96, green: 0.97, blue: 1), location: 0.18),
+                        ],
+                        startPoint: UnitPoint(x: 0.5, y: 0),
+                        endPoint: UnitPoint(x: 0.5, y: 1)
+                        ))
             }
         }
     }
+}
+
+public func triggerHapticFeedback() {
+    let generator = UIImpactFeedbackGenerator(style: .medium)
+    generator.prepare()
+    generator.impactOccurred()
 }

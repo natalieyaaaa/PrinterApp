@@ -29,7 +29,7 @@ struct OnBoardingUp: View {
             OnBoardingUpTemplate(selectedTab: $selectedTab, title: "Import Files from\n Anywhere", text: "Easily import docs from iCloud, Files, Photo,\n and Scanner", image: "ob3")
         case .forth:
             OnBoardingUpTemplate(selectedTab: $selectedTab, title: "Print in various\n Formats", text: "Supports the import of various formats for\n fast and convenient printing", image: "ob4")
-
+            
         }
     }
 }
@@ -58,6 +58,7 @@ struct OnBoardingUpTemplate: View {
                 }
                 
                 Button {
+                    triggerHapticFeedback()
                     withAnimation {
                         switch selectedTab {
                         case .first:
@@ -71,13 +72,15 @@ struct OnBoardingUpTemplate: View {
                         }
                     }
                 } label: {
-                        Text("Continue")
-                            .foregroundStyle(.white)
-                            .frame(width: 350, height: 42, alignment: .center)
-                        
-                    }
-                    .padding(.vertical, 12)
-                    .background(RoundedRectangle(cornerRadius: 31).foregroundStyle(.obButton))
+                    Text("Continue")
+                        .foregroundStyle(.white)
+                        .font(Font.system(size: 17, weight: .medium))
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .frame(height: 42)
+                        .padding(.vertical, 12)
+                        .background(RoundedRectangle(cornerRadius: 31).foregroundStyle(.obButton))
+                    
+                }.padding(.horizontal)
                 
             }.background(BackgroundOB(image: image))
         }

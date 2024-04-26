@@ -58,6 +58,7 @@ struct OnBoardingDownTemplate: View {
                     Text(text)
                         .multilineTextAlignment(.center)
                         .font(Font.system(size: 19))
+                        .foregroundStyle(.gray)
                     
                     HStack(spacing: 8) {
                         ForEach([OnBoardingBottom.Tabs.first, .second, .third, .forth], id: \.self) { tab in
@@ -69,6 +70,7 @@ struct OnBoardingDownTemplate: View {
                 }
                 
                 Button {
+                    triggerHapticFeedback()
                     withAnimation {
                         switch selectedTab {
                         case .first:
@@ -88,11 +90,12 @@ struct OnBoardingDownTemplate: View {
                 } label: {
                     Text("Continue")
                         .foregroundStyle(.white)
-                        .frame(width: 350, height: 42, alignment: .center)
-                    
-                }
-                .padding(.vertical, 12)
-                .background(RoundedRectangle(cornerRadius: 31).foregroundStyle(.obButton))
+                        .font(.system(size: 17, weight: .medium))
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .frame(height: 42)
+                        .padding(.vertical, 12)
+                        .background(RoundedRectangle(cornerRadius: 31).foregroundStyle(.obButton))
+                }.padding(.horizontal)
                 
             }.background(BackgroundOB(image: image))
         }
