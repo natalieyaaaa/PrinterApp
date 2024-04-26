@@ -1,65 +1,64 @@
-////
-////  PaywallUp.swift
-////  PrinterApp
-////
-////  Created by Наташа Яковчук on 25.04.2024.
-////
 //
-//import SwiftUI
+//  PaywallUp.swift
+//  PrinterApp
 //
-//struct PaywallUp: View {
-//    var body: some View {
-//                VStack(spacing: 16) {
-//                    Spacer()
-//                    
-//                    VStack(spacing: 8) {
-//                        Text(title)
-//                            .font(Font.largeTitle.bold())
-//                            .multilineTextAlignment(.center)
-//                        
-//                        Text(text)
-//                            .multilineTextAlignment(.center)
-//                            .font(Font.system(size: 19))
-//                        
-//                        HStack(spacing: 8) {
-//                            ForEach([OnBoardingBottom.Tabs.first, .second, .third, .forth], id: \.self) { tab in
-//                                Circle()
-//                                    .frame(width: 8)
-//                                    .foregroundColor(tab == selectedTab ? .obButton : .obButton2)
-//                            }
-//                        }
-//                    }
-//                    
-//                    Button {
-//                        withAnimation {
-//                            switch selectedTab {
-//                            case .first:
-//                                selectedTab = .second
-//                                let scenes = UIApplication.shared.connectedScenes
-//                                if let windowScene = scenes.first as? UIWindowScene {
-//                                    SKStoreReviewController.requestReview(in: windowScene)
-//                                }
-//                            case .second:
-//                                selectedTab = .third
-//                            case .third:
-//                                selectedTab = .forth
-//                            case .forth:
-//                                break
-//                            }
-//                        }
-//                    } label: {
-//                        Text("Continue")
-//                            .foregroundStyle(.white)
-//                            .frame(width: 350, height: 42, alignment: .center)
-//                        
-//                    }
-//                    .padding(.vertical, 12)
-//                    .background(RoundedRectangle(cornerRadius: 31).foregroundStyle(.obButton))
-//                    
-//                }.background(BackgroundOB())
-//            }
-//        }
-//    
-//#Preview {
-//    PaywallUp()
-//}
+//  Created by Наташа Яковчук on 25.04.2024.
+//
+
+import SwiftUI
+
+struct PaywallUp: View {
+    @State var isFreeTrial = false
+    var body: some View {
+                VStack(spacing: 16) {
+                    Spacer()
+                    
+                    VStack(spacing: 8) {
+                        Text("Set up printing\n Features")
+                            .font(Font.largeTitle.bold())
+                            .multilineTextAlignment(.center)
+                        
+                        Text("Start a Printer app with no limits just for\n $6.99/week.")
+                            .multilineTextAlignment(.center)
+                            .font(Font.system(size: 19))
+                        
+                    }
+                    
+                    VStack(spacing: 8) {
+                        
+                        HStack {
+                            Text("I want my free trial")
+                            Toggle("", isOn: $isFreeTrial)
+                                .tint(.obButton)
+                        }.frame(maxWidth: .infinity)
+                        .padding()
+                        .background(RoundedRectangle(cornerRadius: 32).foregroundStyle(.obButton2))
+                            .padding(.horizontal,16)
+                        
+                        Button {
+                            
+                        } label: {
+                            
+                            VStack{
+                                Text(isFreeTrial ? "3-day Free Trial then $6.99/week" : "Subscribe for $6.99/week")
+                                    .fontWeight(.medium)
+                                    .foregroundStyle(.white)
+                                    
+                                Text("Cancel anytime")
+                                    .foregroundStyle(.white)
+                                    .font(Font.system(size: 15))
+
+                            }
+                        }.frame(maxWidth: .infinity)
+                            .padding()
+                        .background(RoundedRectangle(cornerRadius: 31).foregroundStyle(.obButton))
+                        .padding(.horizontal,16)
+                    
+                    }
+                }.background(BackgroundOB(image: "paywallUp"))
+            }
+        }
+    
+#Preview {
+    PaywallUp()
+}
